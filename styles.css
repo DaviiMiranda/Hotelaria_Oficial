@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    
+}
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    
+    --primaria: #121842;
+    --secundaria: #7c3aed;
+    --escuro: #0f172a;
+    --maisEscuro: ☐ #0a0f1c;
+    --clara: #e2e8f0;
+    --vidro:rgba(255, 255, 255, 0.1);
+    
+
+}
+/*TELA PRINCIPAL */
+.form1 {
+  max-width: 400px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: var(--vidro);
+  border-radius: 12px;
+  color: var(--clara);
+}
