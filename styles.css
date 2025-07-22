@@ -4,21 +4,16 @@
     box-sizing: border-box;
 
 }
-
 html {
     scroll-behavior: smooth;
 }
-
 :root {
 
     --primaria: #919191;
     --secundaria: #2a0000;
     --texto: #F3F3F3;
     --destaque: #f0ab51;
-    
-
 }
-
 /*TELA PRINCIPAL */
 body {
     /* Adiciona 30 pixels de espaço interno no topo e na base, 
@@ -27,11 +22,8 @@ body {
     background-color: var(--primaria);
     color: var(--texto);
     margin-top: 200px;
-
 }
-
 header {
-    
     position: fixed;
     top: 0;
     width: 100%;
@@ -101,7 +93,7 @@ input {
     margin: 40px auto;
     padding: 30px;
     background-color: var(--secundaria);
-    border-radius: 15px;
+    border-radius: 20px;
     color: var(--clara);
     align-items: center;
     display: flex;
