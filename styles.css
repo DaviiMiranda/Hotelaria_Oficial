@@ -2,29 +2,127 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    
+
 }
+
 html {
     scroll-behavior: smooth;
 }
 
 :root {
-    
+
     --primaria: #121842;
     --secundaria: #7c3aed;
     --escuro: #0f172a;
     --maisEscuro: ☐ #0a0f1c;
     --clara: #e2e8f0;
-    --vidro:rgba(255, 255, 255, 0.1);
-    
+    --vidro: rgba(255, 255, 255, 0.1);
+
 
 }
+
 /*TELA PRINCIPAL */
+body {
+    /* Adiciona 30 pixels de espaço interno no topo e na base, 
+       e 40 pixels nas laterais esquerda e direita. */
+    
+    padding: 20px;
+
+}
+
+header {
+    
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    padding: 10px;
+    text-align: center;
+    font-size: 15px;
+    z-index: 1000;
+    /* Garante que o header fique acima de outros elementos */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.9);
+}
+
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+    /* Diminuído de 3rem para 1.5rem */
+    justify-content: center;
+    font-size: 30px;
+}
+
+.menu-link {
+    text-decoration: none;
+    color: var(--clara);
+    font-weight: 500;
+    position: relative;
+    padding-inline: 0.5rem 0;
+    font-size: 1.1rem;
+    /* Adicionado para diminuir o tamanho da fonte dos links */
+}
+
+.menu-link::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(90deg, var(--primaria), var(--secundaria));
+    transition: width 0.5s ease;
+}
+
+.menu-link:hover::after {
+    width: 100%;
+}
+
+label,
+input {
+    display: block;
+    /* Faz com que cada um ocupe uma linha inteira */
+    margin-bottom: 8px;
+    /* Adiciona um pequeno espaço abaixo de cada elemento */
+}
+
+/* Opcional: define uma largura fixa para os inputs para não ficarem gigantes */
+input {
+    width: 300px;
+    padding: 8px;
+    /* Adiciona um espaço interno para o texto não ficar colado na borda */
+}
+
 .form1 {
-  max-width: 400px;
-  margin: 40px auto;
-  padding: 20px;
-  background-color: var(--vidro);
-  border-radius: 12px;
-  color: var(--clara);
+    margin-top: 100px;
+    max-width: 900px;
+    max-height: 1000px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: black;
+    border-radius: 12px;
+    color: var(--clara);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    display: block;
+    width: 318px;
+    /* Largura + padding (300 + 8 + 8) */
+    padding: 10px;
+    margin-top: 15px;
+    /* Espaço acima do botão */
+    background-color: #4CAF50;
+    /* Um verde bonito */
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+    /* Cor um pouco mais escura ao passar o mouse */
 }
