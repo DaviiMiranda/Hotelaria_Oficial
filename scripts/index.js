@@ -1,8 +1,8 @@
 // index.js
 const db = require('./db');
-const { calcularIdade, calcularDiasHospedagem } = require('./hospedes');
+const { calcularIdade, calcularDiasHospedagem } = require('./hospedes1');
 
-db.query('SELECT nome, nascimento, checkin, checkout FROM hospedes', (err, results) => {
+db.query('SELECT nome, nascimento, checkin, checkout FROM hospedes1', (err, results) => {
   if (err) {
     console.error('Erro na consulta:', err);
     return;
@@ -19,7 +19,7 @@ db.query('SELECT nome, nascimento, checkin, checkout FROM hospedes', (err, resul
 });
 
 
-db.query('SELECT * FROM hospedes', (err, results) => {
+db.query('SELECT * FROM hospedes1', (err, results) => {
   if (err) {
     console.error('Erro na consulta:', err);
     return;
