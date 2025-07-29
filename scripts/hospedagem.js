@@ -1,4 +1,4 @@
-window.onload = () => {
+
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('form1');
   const mensagem = document.createElement('p');
@@ -12,9 +12,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const email = document.getElementById('email').value;
     const cpf = document.getElementById('cpf').value;
     const quarto = document.getElementById('quarto').value;
+    const telefone = document.getElementById('telefone').value;
     const nascimento = document.getElementById('nascimento').value;
-    const dataEntrada = document.getElementById('data_entrada').value;
-    const dataSaida = document.getElementById('data_saida').value;
+    const dataEntrada = document.getElementById('data_checkin').value;
+    const dataSaida = document.getElementById('data_checkout').value;
 
     // Limpar mensagem anterior
     mensagem.textContent = '';
@@ -38,19 +39,21 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Envio dos dados
     try {
+      
       const response = await fetch('/hospedes1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          nome: nome,
-          email: email,
-          cpf: cpf,
-          quarto: quarto,
-          nascimento: nascimento,
-          data_entrada: dataEntrada,
-          data_saida: dataSaida
+          nome,
+          cpf,
+          telefone,
+          email,
+          data_checkin,
+          data_checkout,
+          nascimento,
+          quarto
           
         })
       });
@@ -71,4 +74,4 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
-}
+
