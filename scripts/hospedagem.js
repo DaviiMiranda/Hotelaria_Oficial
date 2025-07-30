@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Envio dos dados
     try {
       
-      const response = await fetch('/hospedes1', {
+      const response = await fetch('http://localhost:3000/hospedes1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -74,4 +74,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
 

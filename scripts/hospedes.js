@@ -15,3 +15,4 @@ function calcularDiasHospedagem(dataEntrada, dataSaida) {
   const dias = Math.ceil(diff / (1000 * 60 * 60 * 24));
   return dias;
 }
+module.exports = { calcularIdade, calcularDiasHospedagem };

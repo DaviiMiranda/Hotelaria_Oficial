@@ -24,7 +24,7 @@ app.post('/hospedes1', (req, res) => {
 
   const valores = [nome, email, cpf, quarto, nascimento, data_checkin, data_checkout];
 
-  db.query(sql, valores, (err, result) => {
+  db.query(sql, valores, (err, res) => {
     if (err) {
       console.error('Erro ao inserir no banco:', err);
       return res.status(500).json({ message: 'Erro ao cadastrar hóspede.' });
