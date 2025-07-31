@@ -1,65 +1,53 @@
 // index.js
 const express = require('express');
-const app = express();
+
 const path = require('path');
 const db = require('./db'); // Conexão com MySQL
 const cors = require('cors');
-const PORT = 3000; // Definindo uma porta para o servidor
+const { request } = require('http');
+require('dotenv').config(); // Carrega variáveis de ambiente do arquivo .env
 
-app.use(cors());
+
+const app = express();
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(cors());
 
-const { calcularIdade, calcularDiasHospedagem } = require('./hospedes.js');
+app.delete("/hospedes/:id", async (req, res) => {
+  const id = await parseInt(request.params.id)
+  db.deleteHospede(id);
+  res.sendStatus(204);
+}); 
 
-app.post('/hospedes1', (req, res) => {
-  const { nome, email, cpf, quarto, nascimento, data_checkin, data_checkout } = req.body;
-
-  const sql = `
-    INSERT INTO hospedes1 
-    (nome, email, cpf, quarto, nascimento, data_entrada, data_saida) 
-    VALUES 
-    (?, ?, ?, ?, ?, ?, ?)
-  `;
-
-  const valores = [nome, email, cpf, quarto, nascimento, data_checkin, data_checkout];
-
-  db.query(sql, valores, (err, res) => {
-    if (err) {
-      console.error('Erro ao inserir no banco:', err);
-      return res.status(500).json({ message: 'Erro ao cadastrar hóspede.' });
-    }
-    res.status(201).json({ message: 'Hóspede inserido com sucesso!' });
-  });
+app.patch("/hospedes/:id", async (req, res) => {
+    const id = parseInt(req.params.id)
+    const hospede = req.body;
+    db.updateHospede(id,hospede);
+    res.sendStatus(200);
 });
 
-db.query('SELECT nome, nascimento, data_checkin, data_checkout FROM hospedes1', (err, results) => {
-  if (err) {
-    console.error('Erro na consulta:', err);
-    return;
-  }
-
-  results.forEach(hospede => {
-    const idade = calcularIdade(hospede.nascimento);
-    const dias = calcularDiasHospedagem(hospede.checkin, hospede.checkout);
-
-    console.log(`\nHóspede: ${hospede.nome}`);
-    console.log(`Idade: ${idade} anos`);
-    console.log(`Dias de hospedagem: ${dias} dias`);
-  });
+app.post("/hospedes", async (req, res) => {
+    const hospede =  req.body;
+    await db.insertHospede(hospede);
+    res.status(201).json({ message: "Hóspede criado com sucesso!" });
 });
 
-
-db.query('SELECT * FROM hospedes1', (err, results) => {
-  if (err) {
-    console.error('Erro na consulta:', err);
-    return;
-  }
-
-  console.log('Hospedes encontrados:', results);
+app.get("/hospedes", async (req, res) => {
+    const result = await db.hospedes();
+ 
+    res.json(result);
 });
 
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando com sucesso na porta ${PORT}`);
-  console.log(`Acesse http://localhost:${PORT} para ver seus arquivos estáticos.`);
+app.get("/",  (req, res, next) => {
+    res.json({
+        message: "API de Hotelaria ativa",
+    })
+ })
+
+app.get("/hospede/:id", async (req, res, next) => {
+  const id = parseInt(request.params.id)
+  res.json(db.hospede(id));
+});
+
+app.listen(process.env.PORT,() => {
+    console.log(`Servidor rodando na porta ${process.env.PORT}`);
 });

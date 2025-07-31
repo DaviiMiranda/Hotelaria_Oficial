@@ -1,9 +1,72 @@
+
+app.use(cors());
+app.use(express.json());
+app.use(express.static(path.join(__dirname, '../public')));
+
+const { calcularIdade, calcularDiasHospedagem } = require('./hospedes.js');
+
+app.post('/hospedes1', (req, res) => {
+  const { nome, email, cpf, quarto, nascimento, data_checkin, data_checkout } = req.body;
+
+  const sql = `
+    INSERT INTO hospedes1 
+    (nome, email, cpf, quarto, nascimento, data_entrada, data_saida) 
+    VALUES 
+    (?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  const valores = [nome, email, cpf, quarto, nascimento, data_checkin, data_checkout];
+
+  db.query(sql, valores, (err, res) => {
+    if (err) {
+      console.error('Erro ao inserir no banco:', err);
+      return res.status(500).json({ message: 'Erro ao cadastrar hóspede.' });
+    }
+    res.status(201).json({ message: 'Hóspede inserido com sucesso!' });
+  });
+});
+
+db.query('SELECT nome, nascimento, data_checkin, data_checkout FROM hospedes1', (err, results) => {
+  if (err) {
+    console.error('Erro na consulta:', err);
+    return;
+  }
+
+  results.forEach(hospede => {
+    const idade = calcularIdade(hospede.nascimento);
+    const dias = calcularDiasHospedagem(hospede.checkin, hospede.checkout);
+
+    console.log(`\nHóspede: ${hospede.nome}`);
+    console.log(`Idade: ${idade} anos`);
+    console.log(`Dias de hospedagem: ${dias} dias`);
+  });
+});
+
+
+db.query('SELECT * FROM hospedes1', (err, results) => {
+  if (err) {
+    console.error('Erro na consulta:', err);
+    return;
+  }
+
+  console.log('Hospedes encontrados:', results);
+});
+
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor rodando com sucesso na porta ${PORT}`);
+  console.log(`Acesse http://localhost:${PORT} para ver seus arquivos estáticos.`);
+});
+
+
+
+
+
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('form1');
   const mensagem = document.createElement('p');
   mensagem.id = 'mensagem';
   form.appendChild(mensagem); // Adiciona a mensagem no final do formulário
-  
+
   form.addEventListener('submit', async function (event) {
     event.preventDefault(); // Impede o recarregamento da página
 
@@ -39,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Envio dos dados
     try {
       
-      const response = await fetch('http://localhost:3000/hospedes', {
+      const response = await fetch('http://localhost:3000/hospedes1', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -51,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
           email,
           data_checkin,
           data_checkout,
-          nascimento, 
+          nascimento,
           quarto
           
         })
@@ -73,3 +136,5 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+
