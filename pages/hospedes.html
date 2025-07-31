@@ -3,38 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles.css">
     <title>Hospedes</title>
 </head>
-<body>
-    <header>
+<header>
         <h1>Hotel Overlook</h1>
         <nav>
             <ul class="menu">
-                <li><a href="hospedagem.html" class="menu-link">Início</a></li>
+                <li><a href="hospedagem.html" class="menu-link">Hospedagem</a></li>
                 <li><a href="quartos.html" class="menu-link">Quartos</a></li>
                 <li><a href="funcionario.html" class="menu-link">ADM</a></li>
                 <li><a href="hospedes.html" class="menu-link">Hospedes</a></li>
             </ul>
         </nav>
-    
-    </header>
-    <div>
-        <h1>Hospedes</h1>
-        <div class="table-container">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome do Hóspede</th>
-                        <th>Email</th>
-                        <th>CPF</th>
-                        <th>Check-in</th>
-                        <th>Check-out</th>
-                        <th>Quarto</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                
+    </header> 
+<body>
+  <h1>Hóspedes Cadastrados</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <th>Nome</th>
+        <th>CPF</th>
+        <th>Telefone</th>
+        <th>Email</th>
+        <th>Data Check-in</th>
+        <th>Data Check-out</th>
+        <th>Nascimento</th>
+        <th>Quarto</th>
+      </tr>
+    </thead>
+    <tbody id="tabela-hospedes">
+      <!-- Os hóspedes serão adicionados aqui pelo JavaScript -->
+    </tbody>
+  </table>
 
-    </div>
+  <script src="../scripts/hospedes.js"></script>
 </body>
 </html>

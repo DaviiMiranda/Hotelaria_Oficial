@@ -1,5 +1,6 @@
 // db.js
 const mysql = require('mysql2/promise');
+import { calcularDiasHospedagem, calcularIdade, caluculoValorTotal } from './functions.js'; // Importa as funções necessárias
 const client = mysql.createPool({
   host: "localhost",
   user: "root",
@@ -38,5 +39,11 @@ async function deleteHospede(id) {
   const values = [id]
   await client.query('DELETE FROM hospedes1 WHERE id = ?;', values);
   
+}
+
+async function reservar(hospede) {
+  const values = [hospede.id, hospede.nome, hospede.data_checkin, hospede.data_checkout,valor_total, "ativa"];
+  const valor_total = caluculoValorTotal(calcularDiasHospedagem(hospede.data_checkin, hospede.data_checkout), hospede.quartos[0].diaria);
+  await client.query('INSERT INTO reservas (id_hospede, id_quarto, data_checkin, data_checkout, valor_total, status) VALUES (?, ?, ?, ?, ?, ?);', values);
 }
 module.exports =  { hospedes, hospede, insertHospede, updateHospede, deleteHospede, client };

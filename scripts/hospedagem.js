@@ -1,3 +1,4 @@
+import { calcularDiasHospedagem, calcularIdade } from "functions.js";
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('form1');
   const mensagem = document.createElement('p');
@@ -10,32 +11,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const nome = document.getElementById('nome').value.trim();
     const email = document.getElementById('email').value;
     const cpf = document.getElementById('cpf').value;
-    const quarto = document.getElementById('quarto').value;
     const telefone = document.getElementById('telefone').value;
+    const data_checkin = document.getElementById('data_checkin').value;
+    const data_checkout = document.getElementById('data_checkout').value;
     const nascimento = document.getElementById('nascimento').value;
-    const dataEntrada = document.getElementById('data_checkin').value;
-    const dataSaida = document.getElementById('data_checkout').value;
+    const quarto = document.getElementById('quarto').value;
 
     // Limpar mensagem anterior
     mensagem.textContent = '';
     mensagem.style.color = 'red';
 
+    //calculos
+    
+
     // Validações
-    if (!nome || !nascimento || !dataEntrada || !dataSaida) {
-      mensagem.textContent = 'Preencha todos os campos.';
-      return;
-    }
-
-    if (new Date(nascimento) > new Date()) {
-      mensagem.textContent = 'Data de nascimento inválida.';
-      return;
-    }
-
-    if (new Date(dataEntrada) > new Date(dataSaida)) {
-      mensagem.textContent = 'A data de entrada não pode ser maior que a de saída.';
-      return;
-    }
-
+    
     // Envio dos dados
     try {
       

@@ -1,7 +1,6 @@
 // index.js
 const express = require('express');
 
-const path = require('path');
 const db = require('./db'); // Conexão com MySQL
 const cors = require('cors');
 const { request } = require('http');
@@ -27,6 +26,7 @@ app.patch("/hospedes/:id", async (req, res) => {
 
 app.post("/hospedes", async (req, res) => {
     const hospede =  req.body;
+    console.log(req.body)
     await db.insertHospede(hospede);
     res.status(201).json({ message: "Hóspede criado com sucesso!" });
 });
@@ -46,6 +46,12 @@ app.get("/",  (req, res, next) => {
 app.get("/hospede/:id", async (req, res, next) => {
   const id = parseInt(request.params.id)
   res.json(db.hospede(id));
+});
+
+app.post("/reservas", async (req, res) => {
+  const reserva = req.body;
+    await db.reservar(reserva);
+    res.status(201).json({ message: "Reserva criada com sucesso!" });
 });
 
 app.listen(process.env.PORT,() => {
