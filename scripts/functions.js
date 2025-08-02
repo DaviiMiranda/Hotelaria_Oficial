@@ -17,10 +17,9 @@ function calcularDiasHospedagem(dataEntrada, dataSaida) {
 }
 function caluculoValorTotal(diasHospedagem, diaria) {
     
-    return diasHospedagem * diaria
-    }
+    return diasHospedagem * diaria }
 
 
 
 
-module.exports = { calcularIdade, calcularDiasHospedagem };
+module.exports = { calcularIdade, calcularDiasHospedagem, caluculoValorTotal };

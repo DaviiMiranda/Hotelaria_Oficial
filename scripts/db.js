@@ -1,12 +1,18 @@
 // db.js
 const mysql = require('mysql2/promise');
-import { calcularDiasHospedagem, calcularIdade, caluculoValorTotal } from './functions.js'; // Importa as funções necessárias
+const { calcularDiasHospedagem, calculoValorTotal } = require('./functions.js');
 const client = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "1234", // <<< coloque aqui
   database: "Hotel_Overlook"
 });
+
+async function verificarDisponibilidadeQuarto(hospede) {
+  const reservas = await client.query('SELECT * FROM quartos where tipo = ? AND numero NOT IN ( SELECT id_quarto FROM reservas WHERE status = "Ativa" AND (data_checkin < ? AND data_checkout > ?) );', [hospede.quarto, hospede.data_checkin, hospede.data_checkout]);
+  return reservas[0].length === 0; // Retorna true se não houver reservas ativas nesse quarto
+
+}
 
 async function hospedes() {
   const hospedes = await client.query('SELECT * FROM hospedes1;');
@@ -42,8 +48,28 @@ async function deleteHospede(id) {
 }
 
 async function reservar(hospede) {
-  const values = [hospede.id, hospede.nome, hospede.data_checkin, hospede.data_checkout,valor_total, "ativa"];
-  const valor_total = caluculoValorTotal(calcularDiasHospedagem(hospede.data_checkin, hospede.data_checkout), hospede.quartos[0].diaria);
-  await client.query('INSERT INTO reservas (id_hospede, id_quarto, data_checkin, data_checkout, valor_total, status) VALUES (?, ?, ?, ?, ?, ?);', values);
+  const x = await client.query('select * from hospedes1 where cpf = ?;', [hospede.cpf]);
+  if (x[0].length === 0) {
+    const dias = calcularDiasHospedagem(hospede.data_checkin, hospede.data_checkout);
+    const valor_total = calculoValorTotal(dias, hospede.quarto);
+    const values = [hospede.id, hospede.nome, hospede.data_checkin, hospede.data_checkout,valor_total, "ativa"];
+    await client.query('INSERT INTO reservas (id_hospede, id_quarto, data_checkin, data_checkout, valor_total, status) VALUES (?, ?, ?, ?, ?, ?);', values);
+  } else {
+    throw new Error('Hóspede já cadastrado com este CPF(FAÇA RESERVA RÁPIDA)');
+  }
+
+  }
+
+async function reservaRapida(hospede) {
+  
+  const dias = calcularDiasHospedagem(hospede.data_checkin, hospede.data_checkout);
+  const valor_total = calculoValorTotal(dias, hospede.quarto);
+  await client.query('INSERT INTO reservas (id_hospede, id_quarto, data_checkin, data_checkout, valor_total, status) VALUES (?, ?, ?, ?, ?, ?);', [hospede.cpf, hospede.quarto, hospede.data_checkin, hospede.data_checkout, valor_total, "ativa"]);
+  await client.query('UPDATE quartos SET ocupado = 1 WHERE id = ?;', [hospede.quarto]);
 }
-module.exports =  { hospedes, hospede, insertHospede, updateHospede, deleteHospede, client };
+
+async function cancelarReserva(id) {
+  await client.query('UPDATE reservas SET status = "Cancelada" WHERE id = ?;', [id]);
+
+}
+module.exports =  { hospedes, hospede, insertHospede, updateHospede, deleteHospede, reservar, reservaRapida, verificarDisponibilidadeQuarto, cancelarReserva, client };

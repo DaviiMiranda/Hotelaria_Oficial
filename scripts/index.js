@@ -48,11 +48,32 @@ app.get("/hospede/:id", async (req, res, next) => {
   res.json(db.hospede(id));
 });
 
-app.post("/reservas", async (req, res) => {
+app.post("/reservar", async (req, res) => {
   const reserva = req.body;
+  
+  if (db.verificarDisponibilidadeQuarto(reserva)){
     await db.reservar(reserva);
     res.status(201).json({ message: "Reserva criada com sucesso!" });
+  }
+  else {
+    res.status(400).json({ message: "Quarto não disponível para as datas selecionadas." });
+  }
 });
+
+app.post("/reservaRapida", async (req, res) => {
+  const reserva = req.body;
+  db.verificarDisponibilidadeQuarto(reserva);
+  await db.reservaRapida(reserva);
+  res.status(201).json({ message: "Reserva criada com sucesso!" });
+});
+
+app.post("/cancelarReserva/:id", async (req, res) => { 
+  const id = parseInt(request.params.id)
+  db.cancelarReserva(id);
+  res.status(200).json({ message: "Reserva cancelada com sucesso!" });
+});
+
+
 
 app.listen(process.env.PORT,() => {
     console.log(`Servidor rodando na porta ${process.env.PORT}`);

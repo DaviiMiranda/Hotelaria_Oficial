@@ -1,4 +1,4 @@
-import { calcularDiasHospedagem, calcularIdade } from "functions.js";
+
 document.addEventListener('DOMContentLoaded', function () {
   const form = document.getElementById('form1');
   const mensagem = document.createElement('p');
@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Envio dos dados
     try {
       
-      const response = await fetch('http://localhost:3000/hospedes', {
+      const response = await fetch('http://localhost:3000/reservar', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
