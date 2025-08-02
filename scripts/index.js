@@ -50,10 +50,10 @@ app.get("/hospede/:id", async (req, res, next) => {
 
 app.post("/reservar", async (req, res) => {
   const reserva = req.body;
-  
-  if (db.verificarDisponibilidadeQuarto(reserva)){
+  const dis = await db.verificarDisponibilidadeQuarto(reserva); 
+  if (dis) {
     await db.reservar(reserva);
-    res.status(201).json({ message: "Reserva criada com sucesso!" });
+    res.status(201).json({ message: "Reserva criada com sucesso! Com o Quarto numero:"+ dis });
   }
   else {
     res.status(400).json({ message: "Quarto não disponível para as datas selecionadas." });
@@ -62,15 +62,26 @@ app.post("/reservar", async (req, res) => {
 
 app.post("/reservaRapida", async (req, res) => {
   const reserva = req.body;
-  db.verificarDisponibilidadeQuarto(reserva);
-  await db.reservaRapida(reserva);
-  res.status(201).json({ message: "Reserva criada com sucesso!" });
+  const dis = await db.verificarDisponibilidadeQuarto(reserva);
+  if (dis) {
+    await db.reservaRapida(reserva);
+    res.status(201).json({ message: "Reserva Rapida criada com sucesso! Com o Quarto numero:"+ dis });
+  }
+  else {
+    res.status(400).json({ message: "Quarto não disponível para as datas selecionadas." });
+  }
+
 });
 
 app.post("/cancelarReserva/:id", async (req, res) => { 
   const id = parseInt(request.params.id)
   db.cancelarReserva(id);
   res.status(200).json({ message: "Reserva cancelada com sucesso!" });
+});
+
+app.get("/quartos", async (req, res) => {
+  const quartos = await db.quartos();
+  res.json(quartos);
 });
 
 

@@ -119,3 +119,36 @@ button:hover {
     background-color: #45a049;
     /* Cor um pouco mais escura ao passar o mouse */
 }
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+  background-color: var(--destaque);
+  color: #ecf0f1;
+}
+
+thead th {
+  padding: 12px 15px;
+  text-align: left;
+  font-weight: bold;
+}
+
+tbody td {
+  padding: 10px 15px;
+  border-top: 1px solid #ddd;
+}
+
+tbody tr:nth-child(even) {
+  background-color: var(--primaria);
+}
+
+tbody tr:hover {
+  background-color: #f1f1f1;
+  transition: background-color 0.2s;
+}
