@@ -65,9 +65,10 @@ async function updateHospede(id, updatedHospede) {
   hospede.data_checkin = updatedHospede.data_checkin;
   hospede.data_checkout = updatedHospede.data_checkout;
 }
+
 async function deleteHospede(id) {
   const values = [id]
-  await client.query('DELETE FROM hospedes1 WHERE id = ?;', values);
+  await client.query('DELETE FROM hospedes1 WHERE cpf = ?;', values);
   
 }
 

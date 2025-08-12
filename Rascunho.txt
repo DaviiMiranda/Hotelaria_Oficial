@@ -1,140 +1,27 @@
+const express = require('express');
+const cors = require('cors');
+const routes = require('./routes');
 
+const app = express();
+
+// Middlewares
 app.use(cors());
 app.use(express.json());
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.urlencoded({ extended: true }));
 
-const { calcularIdade, calcularDiasHospedagem } = require('./hospedes.js');
+// Rotas
+app.use('/api', routes);
 
-app.post('/hospedes1', (req, res) => {
-  const { nome, email, cpf, quarto, nascimento, data_checkin, data_checkout } = req.body;
-
-  const sql = `
-    INSERT INTO hospedes1 
-    (nome, email, cpf, quarto, nascimento, data_entrada, data_saida) 
-    VALUES 
-    (?, ?, ?, ?, ?, ?, ?)
-  `;
-
-  const valores = [nome, email, cpf, quarto, nascimento, data_checkin, data_checkout];
-
-  db.query(sql, valores, (err, res) => {
-    if (err) {
-      console.error('Erro ao inserir no banco:', err);
-      return res.status(500).json({ message: 'Erro ao cadastrar hóspede.' });
-    }
-    res.status(201).json({ message: 'Hóspede inserido com sucesso!' });
-  });
+// Rota de health check para testes
+app.get('/', (req, res) => {
+  res.json({ message: 'API funcionando!' });
 });
 
-db.query('SELECT nome, nascimento, data_checkin, data_checkout FROM hospedes1', (err, results) => {
-  if (err) {
-    console.error('Erro na consulta:', err);
-    return;
-  }
-
-  results.forEach(hospede => {
-    const idade = calcularIdade(hospede.nascimento);
-    const dias = calcularDiasHospedagem(hospede.checkin, hospede.checkout);
-
-    console.log(`\nHóspede: ${hospede.nome}`);
-    console.log(`Idade: ${idade} anos`);
-    console.log(`Dias de hospedagem: ${dias} dias`);
-  });
+// Middleware de erro
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).json({ error: 'Algo deu errado!' });
 });
 
-
-db.query('SELECT * FROM hospedes1', (err, results) => {
-  if (err) {
-    console.error('Erro na consulta:', err);
-    return;
-  }
-
-  console.log('Hospedes encontrados:', results);
-});
-
-app.listen(PORT, () => {
-  console.log(`🚀 Servidor rodando com sucesso na porta ${PORT}`);
-  console.log(`Acesse http://localhost:${PORT} para ver seus arquivos estáticos.`);
-});
-
-
-
-
-
-document.addEventListener('DOMContentLoaded', function () {
-  const form = document.getElementById('form1');
-  const mensagem = document.createElement('p');
-  mensagem.id = 'mensagem';
-  form.appendChild(mensagem); // Adiciona a mensagem no final do formulário
-
-  form.addEventListener('submit', async function (event) {
-    event.preventDefault(); // Impede o recarregamento da página
-
-    const nome = document.getElementById('nome').value.trim();
-    const email = document.getElementById('email').value;
-    const cpf = document.getElementById('cpf').value;
-    const quarto = document.getElementById('quarto').value;
-    const telefone = document.getElementById('telefone').value;
-    const nascimento = document.getElementById('nascimento').value;
-    const dataEntrada = document.getElementById('data_checkin').value;
-    const dataSaida = document.getElementById('data_checkout').value;
-
-    // Limpar mensagem anterior
-    mensagem.textContent = '';
-    mensagem.style.color = 'red';
-
-    // Validações
-    if (!nome || !nascimento || !dataEntrada || !dataSaida) {
-      mensagem.textContent = 'Preencha todos os campos.';
-      return;
-    }
-
-    if (new Date(nascimento) > new Date()) {
-      mensagem.textContent = 'Data de nascimento inválida.';
-      return;
-    }
-
-    if (new Date(dataEntrada) > new Date(dataSaida)) {
-      mensagem.textContent = 'A data de entrada não pode ser maior que a de saída.';
-      return;
-    }
-
-    // Envio dos dados
-    try {
-      
-      const response = await fetch('http://localhost:3000/hospedes1', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          nome,
-          cpf,
-          telefone,
-          email,
-          data_checkin,
-          data_checkout,
-          nascimento,
-          quarto
-          
-        })
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.message || 'Erro ao cadastrar hóspede');
-      }
-
-      mensagem.textContent = 'Hóspede cadastrado com sucesso!';
-      mensagem.style.color = 'green';
-      form.reset();
-
-    } catch (error) {
-      mensagem.textContent = error.message;
-      mensagem.style.color = 'red';
-    }
-  });
-});
-
-
+// IMPORTANTE: Exportar o app SEM .listen()
+module.exports = app;

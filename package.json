@@ -10,9 +10,9 @@
   "name": "projeto_hotelaria",
   "version": "1.0.0",
   "description": "",
-  
   "scripts": {
-    "start": "nodemon index.js"
+    "start": "node index.js",
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -25,5 +25,9 @@
   "bugs": {
     "url": "https://github.com/DaviiMiranda/Hotelaria_Oficial/issues"
   },
-  "homepage": "https://github.com/DaviiMiranda/Hotelaria_Oficial#readme"
+  "homepage": "https://github.com/DaviiMiranda/Hotelaria_Oficial#readme",
+  "devDependencies": {
+    "jest": "^30.0.5",
+    "supertest": "^7.1.4"
+  }
 }

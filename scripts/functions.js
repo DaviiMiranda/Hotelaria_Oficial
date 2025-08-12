@@ -37,4 +37,4 @@ function calucularCustoTotal(dataEntrada, dataSaida, quarto) {
 
 
 
-module.exports = { calcularIdade,  calucularCustoTotal };
+module.exports = { calcularIdade,  calucularCustoTotal};
