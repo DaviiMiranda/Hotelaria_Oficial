@@ -1,6 +1,0 @@
-Receber as infos do hospede
-calcular tudo a respeito da hospedagem
-guardar no BD os hospedes
-guardar todos os quartos no BD
-Ter a tela de quartos para ver em tempo real os quartos ocupados
-Ter a parte ADM que vai poder editar tudo e ter outras permissoes especiais
