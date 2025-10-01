@@ -5,6 +5,10 @@
       <tr>
         <th>Name</th>
         <th>CPF</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Date In</th>
+        <th>Date Out</th>
         <th>Room</th>
       </tr>
     </thead>
@@ -12,6 +16,10 @@
       <tr *ngFor="let guest of guests">
         <td>{{ guest.name }}</td>
         <td>{{ guest.cpf }}</td>
+        <td>{{ guest.email }}</td>
+        <td>{{ guest.phone }}</td>
+        <td>{{ guest.dateIn }}</td>
+        <td>{{ guest.dateOut }}</td>
         <td>{{ guest.room }}</td>
       </tr>
     </tbody>
