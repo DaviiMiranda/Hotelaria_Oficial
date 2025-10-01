@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Room {
+  id: string;
   number: string;
   type: string;
   price: number;
@@ -22,7 +23,7 @@ export class RoomService {
     return this.http.get<Room[]>(this.apiUrl);
   }
 
-  getRoomById(id: number): Observable<Room> {
+  getRoomById(id: string): Observable<Room> {
     return this.http.get<Room>(`${this.apiUrl}/${id}`);
   }
 
@@ -30,11 +31,11 @@ export class RoomService {
     return this.http.post<Room>(this.apiUrl, room);
   }
 
-  updateRoom(id: number, available: boolean): Observable<Room> {
+  updateRoom(id: string, available: boolean): Observable<Room> {
     return this.http.put<Room>(`${this.apiUrl}/${id}`, { available });
   }
 
-  deleteRoom(id: number): Observable<void> {
+  deleteRoom(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
   

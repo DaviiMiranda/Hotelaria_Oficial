@@ -35,9 +35,9 @@ export class Rooms  {
         this.loadRooms();
       });
     }
-  
-    deleteGuest(guestId: number) {
-      this.roomService.deleteRoom(guestId).subscribe(() => {
+
+    deleteGuest(Id: string) {
+      this.roomService.deleteRoom(Id).subscribe(() => {
         this.loadRooms();
       });
     }

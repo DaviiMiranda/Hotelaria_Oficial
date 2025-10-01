@@ -13,7 +13,6 @@ import com.example.back_hotelaria.Models.Guest;
 
 @RestController
 @RequestMapping("/api/guests")
-@CrossOrigin(origins = "http://localhost:4200")
 public class GuestController {
 
     @Autowired
@@ -24,25 +23,28 @@ public class GuestController {
         return guestRepository.findAll();
     }
 
-    // Faltava implementar os outros métodos também, adicionei como no exemplo original
-    
-    // CREATE: Mapeia para POST /api/tasks
+    // CREATE: Mapeia para POST /api/guests
     @PostMapping
     public Guest createGuest(@RequestBody Guest guest) {
         return guestRepository.save(guest);
     }
 
-    // UPDATE: Mapeia para PUT /api/tasks/{id}
+    // UPDATE: Mapeia para PUT /api/guests/{id}
     @PutMapping("/{id}")
     public Guest updateGuest(@PathVariable Long id, @RequestBody Guest guestDetails) {
         Guest guest = guestRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Hóspede não encontrado com id: " + id));
         guest.setName(guestDetails.getName());
         guest.setEmail(guestDetails.getEmail());
+        guest.setPhone(guestDetails.getPhone());
+        guest.setCPF(guestDetails.getCPF());
+        guest.setCheckInDate(guestDetails.getCheckInDate());
+        guest.setCheckOutDate(guestDetails.getCheckOutDate());
+        guest.setRoomNumber(guestDetails.getRoomNumber());
         return guestRepository.save(guest);
     }
 
-    // DELETE: Mapeia para DELETE /api/tasks/{id}
+    // DELETE: Mapeia para DELETE /api/guests/{id}
     @DeleteMapping("/{id}")
     public void deleteGuest(@PathVariable Long id) {
         guestRepository.deleteById(id);
