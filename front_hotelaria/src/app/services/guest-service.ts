@@ -23,6 +23,10 @@ export class guestService {
 
   constructor(private http: HttpClient) { }
   
+  Register(guestData: any): Observable<any> {
+    return this.http.post<any>(this.apiUrl, guestData);
+  }
+
   getGuests(): Observable<Guest[]> {
     return this.http.get<Guest[]>(this.apiUrl);
   }

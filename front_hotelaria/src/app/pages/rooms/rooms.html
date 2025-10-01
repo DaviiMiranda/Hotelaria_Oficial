@@ -9,10 +9,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let room of rooms">
+      <tr *ngFor="let room of Rooms">
         <td>{{ room.number }}</td>
         <td>{{ room.type }}</td>
-        <td>{{ room.status }}</td>
+        <td>{{ room.available ? 'Available' : 'Unavailable' }}</td>
       </tr>
     </tbody>
   </table>

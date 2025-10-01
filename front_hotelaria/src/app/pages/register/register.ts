@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { guestService } from '../../services/guest-service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -10,7 +12,7 @@ import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angula
 export class Register {
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private guestService: guestService, private router: Router) {
     this.registerForm = this.fb.group({
       checkin: ['', Validators.required],
       checkout: ['', Validators.required],
@@ -24,8 +26,30 @@ export class Register {
 
   onSubmit() {
     if (this.registerForm.valid) {
-      console.log(this.registerForm.value);
-      // aqui você pode enviar os dados para o backend
+      const guestData = this.registerForm.value;
+      
+       this.guestService.Register(guestData).subscribe({
+        // Callback para SUCESSO
+        next: (response) => {
+          console.log('Hóspede registrado com sucesso!', response);
+          
+          // Ação de sucesso: mostre um alerta e redirecione para outra página
+          alert('Hóspede registrado com sucesso!');
+          this.router.navigate(['/guests']); // Ex: Redireciona para a lista de hóspedes
+        },
+        // Callback para ERRO
+        error: (err) => {
+          console.error('Erro ao registrar hóspede:', err);
+
+          // Ação de erro: mostre um alerta para o usuário
+          alert('Não foi possível registrar o hóspede. Tente novamente.');
+        }
+      });
+
+    } else {
+      // Se o formulário for inválido, mostramos um erro no console
+      console.error('Formulário inválido. Por favor, corrija os campos.');
+      // O ideal aqui seria marcar os campos inválidos em vermelho na tela
     }
   }
 }

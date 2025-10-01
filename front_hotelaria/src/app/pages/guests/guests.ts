@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './guests.html',
   styleUrl: './guests.css'
 })
+
 export class Guests {
   guests: Guest[] = [];
 

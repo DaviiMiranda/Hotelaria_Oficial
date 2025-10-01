@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Room, RoomService } from '../../services/room-service';
 
 @Component({
   selector: 'app-rooms',
@@ -7,11 +8,37 @@ import { CommonModule } from '@angular/common';
   templateUrl: './rooms.html',
   styleUrl: './rooms.css'
 })
-export class Rooms {
-  rooms = [
-    { number: '101', type: 'Normal', status: 'Occupied' },
-    { number: '102', type: 'Plus', status: 'Available' },
-    { number: '103', type: 'Max', status: 'Occupied' },
-    { number: '201', type: 'Presidential Suite', status: 'Available' },
-  ];
+export class Rooms  {
+  Rooms: Room[] = [];
+
+    constructor(private roomService: RoomService) {}
+
+    ngOnInit(): void {
+      this.loadRooms();
+    }
+
+    loadRooms() {
+      this.roomService.getRooms().subscribe((data) => {
+        this.Rooms = data;
+        console.log(data);
+      });
+    }
+
+    addRoom(newRoom: Room) {
+      this.roomService.addRoom(newRoom).subscribe(() => {
+        this.loadRooms();
+      });
+    }
+
+    addGuest(newGuest: Room) {
+      this.roomService.addRoom(newGuest).subscribe(() => {
+        this.loadRooms();
+      });
+    }
+  
+    deleteGuest(guestId: number) {
+      this.roomService.deleteRoom(guestId).subscribe(() => {
+        this.loadRooms();
+      });
+    }
 }
