@@ -72,3 +72,17 @@ spring.datasource.password=sua_senha_mysql
 
 # Execute a aplicação com o Maven
 $ mvn spring-boot:run
+
+Executando o Frontend (Angular)
+
+Abra um novo terminal para executar o frontend.
+Bash
+
+# Navegue até a pasta do frontend
+$ cd front_hotelaria
+
+# Instale as dependências (execute apenas na primeira vez)
+$ npm install
+
+# Inicie o servidor de desenvolvimento
+$ ng serve
