@@ -57,10 +57,11 @@ $ git clone https://[URL-DO-SEU-REPOSITORIO-GIT]
 # Acesse a pasta do projeto
 
 $ cd nome-da-pasta-do-projeto
-```
-##Abra seu cliente MySQL e crie o banco de dados para a aplicação:
+
+Abra seu cliente MySQL e crie o banco de dados para a aplicação:
+
 CREATE DATABASE hotelaria_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-# Navegue até a pasta do backend
+#Navegue até a pasta do backend
 $ cd back_hotelaria
 
 #Abra o arquivo src/main/resources/application.properties e altere as seguintes linhas com suas credenciais do MySQL:
