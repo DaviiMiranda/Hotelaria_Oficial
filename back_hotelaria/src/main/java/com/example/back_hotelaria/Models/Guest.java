@@ -1,4 +1,6 @@
 package com.example.back_hotelaria.Models;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -17,7 +19,10 @@ public class Guest {
     private String email;
     private String phone;
     private String CPF;
+    @JsonProperty("checkin")
     private String checkInDate;
+
+    @JsonProperty("checkout")
     private String checkOutDate;
     private int roomNumber;
 }

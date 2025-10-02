@@ -51,11 +51,11 @@ describe('Register Component', () => {
 
   it('should make the form valid when all fields are filled correctly', () => {
     component.registerForm.setValue({
-      checkin: '2024-01-01',
-      checkout: '2024-01-05',
+      checkin: '2025-10-01',
+      checkout: '2025-10-05',
       name: 'John Doe',
       telephone: '1234567890',
-      roomType: 'single',
+      roomType: 'normal',
       email: 'john.doe@example.com',
       cpf: '12345678901'
     });

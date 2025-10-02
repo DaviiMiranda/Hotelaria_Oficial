@@ -14,10 +14,10 @@ export class Register {
 
   constructor(private fb: FormBuilder, private guestService: guestService, private router: Router) {
     this.registerForm = this.fb.group({
-      checkin: ['', Validators.required],
-      checkout: ['', Validators.required],
+      checkInDate: ['', Validators.required],
+      checkOutDate: ['', Validators.required],
       name: ['', Validators.required],
-      telephone: ['', Validators.required],
+      phone: ['', Validators.required],
       roomType: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]]
@@ -31,7 +31,7 @@ export class Register {
        this.guestService.Register(guestData).subscribe({
         // Callback para SUCESSO
         next: (response) => {
-          console.log('Hóspede registrado com sucesso!', response);
+          console.log(guestData, response);
           
           // Ação de sucesso: mostre um alerta e redirecione para outra página
           alert('Hóspede registrado com sucesso!');

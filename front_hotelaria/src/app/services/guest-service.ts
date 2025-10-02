@@ -8,9 +8,9 @@ export interface Guest {
   cpf: string;
   email: string;
   phone: string;
-  dateIn: Date;
-  dateOut: Date;
-  room: number;
+  checkInDate: Date;
+  checkOutDate: Date;
+  roomNumber: number;
 }
 
 @Injectable({
