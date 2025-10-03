@@ -13,7 +13,7 @@ public class Room {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // O banco de dados gerencia a geração do ID
     private Long id;
 
-    private String number;
+    private String roomNumber;
     private String type;
     private double price;
     private boolean available;

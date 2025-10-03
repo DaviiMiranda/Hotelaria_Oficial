@@ -11,5 +11,5 @@ public class GuestDTO {
     private String telephone;
     private String email;
     private String cpf;
-    private int roomNumber;
+    private String roomNumber;
 }

@@ -23,5 +23,5 @@ public class Guest {
     private String checkInDate;
     @JsonProperty("checkout")
     private String checkOutDate;
-    private int roomNumber;
+    private String roomNumber;
 }
