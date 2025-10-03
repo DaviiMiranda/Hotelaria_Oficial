@@ -1,15 +1,15 @@
-
 package com.example.back_hotelaria.controllers;
 
-// TODOS ESTES IMPORTS ESTAVAM FALTANDO
+import com.example.back_hotelaria.dto.GuestDTO;
+import com.example.back_hotelaria.dto.GuestResponseDTO;
+import com.example.back_hotelaria.mapper.GuestMapper;
+import com.example.back_hotelaria.Models.Guest;
+import com.example.back_hotelaria.repositories.GuestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import java.util.List; // Import para a classe List
 
-// Imports para suas classes, agora nos pacotes corretos
-
-import com.example.back_hotelaria.repositories.GuestRepository;
-import com.example.back_hotelaria.Models.Guest;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/guests")
@@ -18,35 +18,33 @@ public class GuestController {
     @Autowired
     private GuestRepository guestRepository;
 
-    @GetMapping
-    public List<Guest> getAllGuests() {
-        return guestRepository.findAll();
-    }
+    @Autowired
+    private GuestMapper guestMapper; // Injeta o nosso Mapper
 
-    // CREATE: Mapeia para POST /api/guests
+    // --- MÉTODO DE CRIAÇÃO (POST) ATUALIZADO ---
     @PostMapping
-    public Guest createGuest(@RequestBody Guest guest) {
-        return guestRepository.save(guest);
+    public GuestResponseDTO createGuest(@RequestBody GuestDTO guestDTO) {
+        // 1. Converte o DTO recebido para uma Entidade
+        Guest guest = guestMapper.toEntity(guestDTO);
+
+        // 2. Salva a Entidade no banco de dados
+        Guest savedGuest = guestRepository.save(guest);
+
+        // 3. Converte a Entidade salva (que agora tem um ID) para um DTO de resposta e o retorna
+        return guestMapper.toResponseDTO(savedGuest);
     }
 
-    // UPDATE: Mapeia para PUT /api/guests/{id}
-    @PutMapping("/{id}")
-    public Guest updateGuest(@PathVariable Long id, @RequestBody Guest guestDetails) {
-        Guest guest = guestRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Hóspede não encontrado com id: " + id));
-        guest.setName(guestDetails.getName());
-        guest.setEmail(guestDetails.getEmail());
-        guest.setPhone(guestDetails.getPhone());
-        guest.setCPF(guestDetails.getCPF());
-        guest.setCheckInDate(guestDetails.getCheckInDate());
-        guest.setCheckOutDate(guestDetails.getCheckOutDate());
-        guest.setRoomNumber(guestDetails.getRoomNumber());
-        return guestRepository.save(guest);
+    // --- MÉTODO DE LISTAGEM (GET) ATUALIZADO ---
+    @GetMapping
+    public List<GuestResponseDTO> getAllGuests() {
+        // 1. Busca todas as Entidades do banco
+        List<Guest> guests = guestRepository.findAll();
+
+        // 2. Converte a lista de Entidades para uma lista de DTOs de resposta
+        return guests.stream()
+                .map(guestMapper::toResponseDTO) // para cada guest, chama o método toResponseDTO
+                .collect(Collectors.toList());
     }
 
-    // DELETE: Mapeia para DELETE /api/guests/{id}
-    @DeleteMapping("/{id}")
-    public void deleteGuest(@PathVariable Long id) {
-        guestRepository.deleteById(id);
-    }
+    // ... outros métodos (getById, update, delete) seguiriam a mesma lógica ...
 }

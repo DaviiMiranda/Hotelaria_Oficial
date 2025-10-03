@@ -21,7 +21,6 @@ public class Guest {
     private String CPF;
     @JsonProperty("checkin")
     private String checkInDate;
-
     @JsonProperty("checkout")
     private String checkOutDate;
     private int roomNumber;
