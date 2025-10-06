@@ -36,8 +36,8 @@ describe('Register Component', () => {
   it('should initialize the form with required fields', () => {
     expect(component.registerForm).toBeDefined();
     const formControls = component.registerForm.controls;
-    expect(formControls['checkin']).toBeDefined();
-    expect(formControls['checkout']).toBeDefined();
+    expect(formControls['checkInDate']).toBeDefined();
+    expect(formControls['checkOutDate']).toBeDefined();
     expect(formControls['name']).toBeDefined();
     expect(formControls['telephone']).toBeDefined();
     expect(formControls['roomType']).toBeDefined();
@@ -51,8 +51,8 @@ describe('Register Component', () => {
 
   it('should make the form valid when all fields are filled correctly', () => {
     component.registerForm.setValue({
-      checkin: '2025-10-01',
-      checkout: '2025-10-05',
+      checkInDate: '2025-10-01',
+      checkOutDate: '2025-10-05',
       name: 'John Doe',
       telephone: '1234567890',
       roomType: 'normal',
@@ -86,8 +86,8 @@ describe('Register Component', () => {
 
     it('should call guestService.Register with form data if the form is valid', () => {
       const guestData = {
-        checkin: '2024-01-01',
-        checkout: '2024-01-05',
+        checkInDate: '2024-01-01',
+        checkOutDate: '2024-01-05',
         name: 'John Doe',
         telephone: '1234567890',
         roomType: 'single',
@@ -104,8 +104,8 @@ describe('Register Component', () => {
 
     it('should show success alert and navigate on successful registration', () => {
       component.registerForm.setValue({
-        checkin: '2024-01-01',
-        checkout: '2024-01-05',
+        checkInDate: '2024-01-01',
+        checkOutDate: '2024-01-05',
         name: 'John Doe',
         telephone: '1234567890',
         roomType: 'single',
@@ -122,11 +122,11 @@ describe('Register Component', () => {
 
     it('should show error alert on failed registration', () => {
       component.registerForm.setValue({
-        checkin: '2024-01-01',
-        checkout: '2024-01-05',
+        checkInDate: '2024-01-01',
+        checkOutDate: '2024-01-05',
         name: 'John Doe',
         telephone: '1234567890',
-        roomType: 'single',
+        roomType: 'normal',
         email: 'john.doe@example.com',
         cpf: '12345678901'
       });

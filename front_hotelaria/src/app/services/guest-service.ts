@@ -7,10 +7,10 @@ export interface Guest {
   name: string;
   cpf: string;
   email: string;
-  phone: string;
-  checkInDate: Date;
-  checkOutDate: Date;
-  roomNumber: number;
+  telephone: string;
+  checkInDate: String;
+  checkOutDate: String;
+  roomNumber: String;
 }
 
 @Injectable({
@@ -23,8 +23,8 @@ export class guestService {
 
   constructor(private http: HttpClient) { }
   
-  Register(guestData: any): Observable<any> {
-    return this.http.post<any>(this.apiUrl, guestData);
+  Register(guestData: Guest): Observable<any> {
+    return this.http.post<Guest>(this.apiUrl, guestData);
   }
 
   getGuests(): Observable<Guest[]> {

@@ -12,9 +12,9 @@ public class GuestMapper {
     public Guest toEntity(GuestDTO dto) {
         Guest guest = new Guest();
         guest.setName(dto.getName());
-        guest.setCheckInDate(dto.getCheckin());
-        guest.setCheckOutDate(dto.getCheckout());
-        guest.setPhone(dto.getTelephone());
+        guest.setCheckInDate(dto.getCheckInDate());
+        guest.setCheckOutDate(dto.getCheckOutDate());
+        guest.setTelephone(dto.getTelephone());
         guest.setEmail(dto.getEmail());
         guest.setCPF(dto.getCpf());
         guest.setRoomNumber(dto.getRoomNumber());
@@ -26,9 +26,9 @@ public class GuestMapper {
         GuestResponseDTO dto = new GuestResponseDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setCheckin(entity.getCheckInDate());
-        dto.setCheckout(entity.getCheckOutDate());
-        dto.setTelephone(entity.getPhone());
+        dto.setCheckInDate(entity.getCheckInDate());
+        dto.setCheckOutDate(entity.getCheckOutDate());
+        dto.setTelephone(entity.getTelephone());
         dto.setEmail(entity.getEmail());
         dto.setCpf(entity.getCPF());
         dto.setRoomNumber(entity.getRoomNumber());

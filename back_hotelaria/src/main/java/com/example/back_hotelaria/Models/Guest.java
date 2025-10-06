@@ -17,7 +17,7 @@ public class Guest {
 
     private String name;
     private String email;
-    private String phone;
+    private String telephone;
     private String CPF;
     @JsonProperty("checkin")
     private String checkInDate;

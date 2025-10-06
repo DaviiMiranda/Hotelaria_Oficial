@@ -17,7 +17,7 @@ export class Register {
       checkInDate: ['', Validators.required],
       checkOutDate: ['', Validators.required],
       name: ['', Validators.required],
-      phone: ['', Validators.required],
+      telephone: ['', Validators.required],
       roomType: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       cpf: ['', [Validators.required, Validators.pattern(/^\d{11}$/)]]
@@ -27,7 +27,7 @@ export class Register {
   onSubmit() {
     if (this.registerForm.valid) {
       const guestData = this.registerForm.value;
-      
+      console.log(guestData)
        this.guestService.Register(guestData).subscribe({
         // Callback para SUCESSO
         next: (response) => {
