@@ -7,6 +7,7 @@
 
 Um projeto full-stack de um sistema de gerenciamento de hotelaria, desenvolvido para aprimorar e demonstrar habilidades em desenvolvimento web com Java/Spring Boot no backend e Angular no frontend.
 <img width="1599" height="455" alt="projetoHotelaria" src="https://github.com/user-attachments/assets/3f614c52-5c41-4d47-8578-894e8a2ec61f" />
+<img width="1599" height="621" alt="projetoHotelaria01" src="https://github.com/user-attachments/assets/f182a6a9-3d63-4ff3-b7f8-ec488207f2c1" />
 
 ## ✨ Funcionalidades
 
