@@ -19,9 +19,9 @@ public class Guest {
     private String email;
     private String telephone;
     private String CPF;
-    @JsonProperty("checkin")
+    @JsonProperty("checkInDate")
     private String checkInDate;
-    @JsonProperty("checkout")
+    @JsonProperty("checkOutDate")
     private String checkOutDate;
     private String roomNumber;
 }

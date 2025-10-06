@@ -15,6 +15,8 @@ import java.util.stream.Collectors;
 @RequestMapping("/api/guests")
 public class GuestController {
 
+    System.out.println("DTO que chega no controller: " + guestDTO);
+
     @Autowired
     private GuestRepository guestRepository;
 

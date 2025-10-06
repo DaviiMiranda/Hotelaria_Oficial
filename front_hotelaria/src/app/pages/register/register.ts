@@ -27,12 +27,12 @@ export class Register {
   onSubmit() {
     if (this.registerForm.valid) {
       const guestData = this.registerForm.value;
-      console.log(guestData)
+      console.log("guestData:", guestData);
        this.guestService.Register(guestData).subscribe({
         // Callback para SUCESSO
         next: (response) => {
-          console.log(guestData, response);
-          
+          console.log("Resposta do servidor:", response);
+
           // Ação de sucesso: mostre um alerta e redirecione para outra página
           alert('Hóspede registrado com sucesso!');
           this.router.navigate(['/guests']); // Ex: Redireciona para a lista de hóspedes
