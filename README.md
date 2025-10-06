@@ -6,9 +6,8 @@
 ![MySQL](https://img.shields.io/badge/MySQL-8.x-4479A1?style=for-the-badge&logo=mysql&logoColor=white)
 
 Um projeto full-stack de um sistema de gerenciamento de hotelaria, desenvolvido para aprimorar e demonstrar habilidades em desenvolvimento web com Java/Spring Boot no backend e Angular no frontend.
-
-![Screenshot do Projeto](https://i.imgur.com/G5iE1tN.png)
-_**Observação:** Sugiro que você tire um screenshot da sua aplicação funcionando e substitua o link acima pela sua própria imagem._
+<img width="1599" height="455" alt="projetoHotelaria" src="https://github.com/user-attachments/assets/3f614c52-5c41-4d47-8578-894e8a2ec61f" />
+<img width="1599" height="621" alt="projetoHotelaria01" src="https://github.com/user-attachments/assets/f182a6a9-3d63-4ff3-b7f8-ec488207f2c1" />
 
 ## ✨ Funcionalidades
 
