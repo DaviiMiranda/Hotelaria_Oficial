@@ -2,10 +2,11 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { guestService } from '../../services/guest-service';
 import { Router } from '@angular/router';
+import { Payment } from "../payment/payment";
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, Payment],
   templateUrl: './register.html',
   styleUrl: './register.css'
 })
