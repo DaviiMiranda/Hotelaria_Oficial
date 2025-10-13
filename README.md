@@ -12,7 +12,7 @@ Um projeto full-stack de um sistema de gerenciamento de hotelaria, desenvolvido 
 ## ✨ Funcionalidades
 
 * **Cadastro de Hóspedes:** Formulário para registro completo de novos hóspedes no sistema.
-* **Cadastro de Quartos:** Permite adicionar novos quartos de diferentes tipos (Normal, Plus, Suíte, etc.) e definir seus preços.
+* **Gerenciar Quartos:** Os quartos são separados por tipo(varia o preço) e são relacionados aos hóspedes e com verificação de disponibilidade.
 * **API RESTful:** Backend robusto que expõe endpoints para todas as operações CRUD (Create, Read, Update, Delete).
 * **Validação de Dados:** Formulários reativos no frontend que validam os dados em tempo real para garantir a integridade das informações.
 
