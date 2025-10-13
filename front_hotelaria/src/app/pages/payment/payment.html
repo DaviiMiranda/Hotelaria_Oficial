@@ -1,24 +1,62 @@
-<h1>Página de Pagamento</h1>
-<div>
-    <div>
-        <label for="">Valor a pagar:</label>
-        <label for="total" >TOTAL: {{ calculateRoomPrice }}</label>
-    </div>
-    <p>Detalhes do pagamento:</p>
-    <!-- <ul>
-        <li>Nome do hóspede: {{guest.Name }}</li>
-        <li>Data de check-in: {{ guest.CheckInDate }}</li>
-        <li>Data de check-out: {{ guest.CheckOutDate }}</li>
-        <li>Quarto: {{ guest.RoomNumber }}</li>
-    </ul> -->
-    <div>
-        <label for="">Forma de Pagamento:</label>
-        <select formControlName="paymentMethod">
-            <option value="creditCard">Cartão de Crédito</option>
-            <option value="debitCard">Cartão de Débito</option>
-            <option value="paypal">PayPal</option>
-        </select>
-    </div>
-    <button (click)="confirmPayment()">Confirmar Pagamento</button>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h2 class="text-center mb-0">Confirmação de Pagamento</h2>
+        </div>
 
+        <div class="card-body p-4">
+
+          <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded">
+            <h4 class="mb-0">Valor Total:</h4>
+            <h3 id="total" class="mb-0 text-success fw-bold">R$ </h3>
+          </div>
+
+          <div *ngIf="guestData">
+            <h5 class="mb-3">Detalhes da Reserva</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Nome do Hóspede:</span>
+                <span class="fw-bold">{{ guestData.name }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Data de Check-in:</span>
+                <span class="fw-bold">{{ guestData.checkInDate }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Data de Check-out:</span>
+                <span class="fw-bold">{{ guestData.checkOutDate }}</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between">
+                <span>Quarto:</span>
+                <span class="fw-bold">{{ guestData.roomNumber }}</span>
+              </li>
+            </ul> 
+          </div>
+
+          <hr class="my-4">
+
+          <div class="mb-4">
+            <label for="paymentMethod" class="form-label h5">Forma de Pagamento:</label>
+            <select id="paymentMethod" class="form-select form-select-lg" formControlName="paymentMethod">
+              <option value="" disabled>Selecione uma opção...</option>
+              <option value="creditCard">Cartão de Crédito</option>
+              <option value="debitCard">Cartão de Débito</option>
+              <option value="paypal">PayPal</option>
+            </select>
+          </div>
+
+          <div class="d-grid">
+            <button class="btn btn-success btn-lg" (click)="confirmPayment()">
+              <i class="bi bi-check-circle-fill me-2"></i> Confirmar e Pagar
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
 </div>

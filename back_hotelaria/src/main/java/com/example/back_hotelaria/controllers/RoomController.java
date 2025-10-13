@@ -7,6 +7,7 @@ import com.example.back_hotelaria.mapper.RoomMapper;
 import com.example.back_hotelaria.dto.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,6 +21,17 @@ public class RoomController {
     private RoomMapper roomMapper;
         
     // CREATE: Mapeia para POST /api/rooms
+
+     // ENDPOINT PARA VERIFICAR DISPONIBILIDADE
+    @GetMapping("/check-availability")
+    public ResponseEntity<Boolean> checkRoomAvailability(@RequestParam String type) {
+        // Usamos o repository para verificar se existe algum quarto do tipo `type` com `available = true`
+        boolean isAvailable = roomRepository.existsByTypeAndAvailable(type, true);
+
+        // Retornamos uma resposta HTTP 200 OK com o resultado (true ou false)
+        return ResponseEntity.ok(isAvailable);
+    }
+
     @PostMapping
     public RoomResponseDTO createRoom(@RequestBody RoomDTO roomDTO) {
         Room room = roomMapper.toEntity(roomDTO);
