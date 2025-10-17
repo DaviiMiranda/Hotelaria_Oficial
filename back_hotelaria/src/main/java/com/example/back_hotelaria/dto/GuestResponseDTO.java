@@ -13,4 +13,5 @@ public class GuestResponseDTO {
     private String email;
     private String cpf;
     private String roomNumber;
+    private String roomType;
 }

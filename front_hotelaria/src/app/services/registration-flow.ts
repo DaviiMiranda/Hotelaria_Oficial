@@ -1,22 +1,32 @@
 import { Injectable } from '@angular/core';
-import { Guest } from './guest-service'; // Importe a interface Guest
+
+export interface RegistrationData {
+  name: string;
+  cpf: string;
+  email: string;
+  telephone: string;
+  checkInDate: String;
+  checkOutDate: String;
+  roomType: string;
+  roomNumber: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
 export class RegistrationFlow {
    // Esta variável privada vai guardar os dados do hóspede.
-  private guestData: Guest | null = null;
+  private guestData: RegistrationData | null = null;
 
   constructor() { }
 
   // O RegisterComponent vai chamar este método para guardar os dados
-  setGuestData(data: Guest) {
+  setGuestData(data: RegistrationData) {
     this.guestData = data;
   }
 
   // O PaymentComponent vai chamar este método para recuperar os dados
-  getGuestData(): Guest | null {
+  getGuestData(): RegistrationData | null {
     return this.guestData;
   }
 

@@ -18,6 +18,7 @@ public class GuestMapper {
         guest.setEmail(dto.getEmail());
         guest.setCPF(dto.getCpf());
         guest.setRoomNumber(dto.getRoomNumber());
+        guest.setRoomType(dto.getRoomType());
         return guest;
     }
 
@@ -32,6 +33,7 @@ public class GuestMapper {
         dto.setEmail(entity.getEmail());
         dto.setCpf(entity.getCPF());
         dto.setRoomNumber(entity.getRoomNumber());
+        dto.setRoomType(entity.getRoomType());
         return dto;
     }
 }

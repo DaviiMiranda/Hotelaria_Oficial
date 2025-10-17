@@ -3,14 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Guest {
-  id: number;
   name: string;
   cpf: string;
   email: string;
   telephone: string;
   checkInDate: String;
   checkOutDate: String;
-  roomNumber: String;
+  roomType: string;
+  roomNumber: string;
 }
 
 @Injectable({

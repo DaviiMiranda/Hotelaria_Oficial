@@ -18,12 +18,14 @@ export class Payment implements OnInit{
   paymentForm: FormGroup;
   roomType: string = '';
   roomPrice: number = 0;
+  totalPrice: number = 0;
 
   guests: Guest[] = [];
   rooms: Room[] = [];
 
   constructor(private fb: FormBuilder, private guestService: guestService, private roomService: RoomService, private router: Router, private registrationFlow: RegistrationFlow) {
     this.paymentForm = this.fb.group({
+      paymentMethod: ['', Validators.required],
       cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
       cardHolderName: ['', Validators.required],
       expirationDate: ['', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]],
@@ -65,12 +67,37 @@ export class Payment implements OnInit{
     // Pega os dados do serviço compartilhado quando o componente é iniciado
     this.guestData = this.registrationFlow.getGuestData();
 
-    // Medida de segurança: se não houver dados, o usuário provavelmente acessou a URL diretamente.
-    // Então, o redirecionamos de volta para a página de registro.
-    //if (!this.guestData) {
-     // console.error("Nenhum dado de hóspede encontrado. Redirecionando para o registro.");
-      //this.router.navigate(['/register']);
-    //}
+    if (this.guestData) {
+      const guestDataAny = this.guestData as any;
+      if (guestDataAny.roomType && guestDataAny.checkInDate && guestDataAny.checkOutDate) {
+        const checkIn = new Date(guestDataAny.checkInDate);
+        const checkOut = new Date(guestDataAny.checkOutDate);
+
+        if (!isNaN(checkIn.getTime()) && !isNaN(checkOut.getTime()) && checkOut > checkIn) {
+          const timeDiff = Math.abs(checkOut.getTime() - checkIn.getTime());
+          const days = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+          let price = 0;
+          switch (guestDataAny.roomType) {
+            case 'normal': // 100s rooms
+              price = 100;
+              break;
+            case 'plus': // 200s rooms
+              price = 200;
+              break;
+            case 'max': // 300s rooms
+              price = 300;
+              break;
+            case 'presidential_suite': // 400s rooms
+              price = 400;
+              break;
+          }
+
+          this.roomPrice = price;
+          this.totalPrice = this.roomPrice * days;
+        }
+      }
+    }
   }
 
 

@@ -21,4 +21,5 @@ public class Guest {
     private String checkInDate;
     private String checkOutDate;
     private String roomNumber;
+    private String roomType;
 }

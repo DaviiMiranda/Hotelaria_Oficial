@@ -12,4 +12,5 @@ public class GuestDTO {
     private String email;
     private String cpf;
     private String roomNumber;
+    private String roomType;
 }

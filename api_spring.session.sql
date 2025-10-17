@@ -1,1 +1,1 @@
-SELECT * FROM guest
+SELECT * FROM room

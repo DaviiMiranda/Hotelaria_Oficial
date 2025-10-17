@@ -11,7 +11,7 @@
 
           <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded">
             <h4 class="mb-0">Valor Total:</h4>
-            <h3 id="total" class="mb-0 text-success fw-bold">R$ </h3>
+            <h3 id="total" class="mb-0 text-success fw-bold">R$ {{ totalPrice | number:'1.2-2' }}</h3>
           </div>
 
           <div *ngIf="guestData">
@@ -31,22 +31,24 @@
               </li>
               <li class="list-group-item d-flex justify-content-between">
                 <span>Quarto:</span>
-                <span class="fw-bold">{{ guestData.roomNumber }}</span>
+                <span class="fw-bold">{{ guestData.roomType }}</span>
               </li>
             </ul> 
           </div>
 
           <hr class="my-4">
 
-          <div class="mb-4">
-            <label for="paymentMethod" class="form-label h5">Forma de Pagamento:</label>
-            <select id="paymentMethod" class="form-select form-select-lg" formControlName="paymentMethod">
-              <option value="" disabled>Selecione uma opção...</option>
-              <option value="creditCard">Cartão de Crédito</option>
-              <option value="debitCard">Cartão de Débito</option>
-              <option value="paypal">PayPal</option>
-            </select>
-          </div>
+          <form [formGroup]="paymentForm">
+            <div class="mb-4">
+              <label for="paymentMethod" class="form-label h5">Forma de Pagamento:</label>
+              <select id="paymentMethod" class="form-select form-select-lg" formControlName="paymentMethod">
+                <option value="" disabled>Selecione uma opção...</option>
+                <option value="creditCard">Cartão de Crédito</option>
+                <option value="debitCard">Cartão de Débito</option>
+                <option value="paypal">PayPal</option>
+              </select>
+            </div>
+          </form>
 
           <div class="d-grid">
             <button class="btn btn-success btn-lg" (click)="confirmPayment()">
