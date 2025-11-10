@@ -51,7 +51,7 @@ Siga os passos abaixo para executar o projeto localmente.
 
 ```bash
 # Clone este repositório
-$ git clone https://[URL-DO-SEU-REPOSITORIO-GIT]](https://github.com/DaviiMiranda/Hotelaria_Oficial.git
+$ git clone https://github.com/DaviiMiranda/Hotelaria_Oficial.git
 
 # Acesse a pasta do projeto
 
