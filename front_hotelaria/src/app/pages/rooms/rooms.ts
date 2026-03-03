@@ -8,37 +8,50 @@ import { Room, RoomService } from '../../services/room-service';
   templateUrl: './rooms.html',
   styleUrl: './rooms.css'
 })
-export class Rooms  {
+export class Rooms {
   Rooms: Room[] = [];
 
-    constructor(private roomService: RoomService) {}
+  private mockRooms: Room[] = [
+    { id: '1', number: '101', type: 'Normal', price: 150.00, available: true },
+    { id: '2', number: '102', type: 'Normal', price: 150.00, available: false },
+    { id: '3', number: '105', type: 'Normal', price: 150.00, available: false },
+    { id: '4', number: '201', type: 'Plus', price: 250.00, available: false },
+    { id: '5', number: '202', type: 'Plus', price: 250.00, available: true },
+    { id: '6', number: '204', type: 'Plus', price: 250.00, available: false },
+    { id: '7', number: '305', type: 'Max', price: 400.00, available: false },
+    { id: '8', number: '308', type: 'Max', price: 400.00, available: false },
+    { id: '9', number: '401', type: 'Max', price: 400.00, available: true },
+    { id: '10', number: '501', type: 'Suíte Presidencial', price: 900.00, available: false },
+    { id: '11', number: '502', type: 'Suíte Presidencial', price: 900.00, available: false }
+  ];
 
-    ngOnInit(): void {
-      this.loadRooms();
-    }
+  constructor(private roomService: RoomService) { }
 
-    loadRooms() {
-      this.roomService.getRooms().subscribe((data) => {
-        this.Rooms = data;
+  ngOnInit(): void {
+    this.loadRooms();
+  }
+
+  loadRooms() {
+    this.roomService.getRooms().subscribe({
+      next: (data) => {
+        this.Rooms = data.length > 0 ? data : this.mockRooms;
         console.log(data);
-      });
-    }
+      },
+      error: () => {
+        this.Rooms = this.mockRooms;
+      }
+    });
+  }
 
-    addRoom(newRoom: Room) {
-      this.roomService.addRoom(newRoom).subscribe(() => {
-        this.loadRooms();
-      });
-    }
+  addRoom(newRoom: Room) {
+    this.roomService.addRoom(newRoom).subscribe(() => {
+      this.loadRooms();
+    });
+  }
 
-    addGuest(newGuest: Room) {
-      this.roomService.addRoom(newGuest).subscribe(() => {
-        this.loadRooms();
-      });
-    }
-
-    deleteGuest(Id: string) {
-      this.roomService.deleteRoom(Id).subscribe(() => {
-        this.loadRooms();
-      });
-    }
+  deleteGuest(Id: string) {
+    this.roomService.deleteRoom(Id).subscribe(() => {
+      this.loadRooms();
+    });
+  }
 }
