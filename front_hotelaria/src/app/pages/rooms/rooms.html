@@ -1,19 +1,32 @@
-<div class="container mt-5">
-  <h2>Room List</h2>
-  <table class="table table-striped table-hover">
-    <thead class="table-dark">
-      <tr>
-        <th>Room Number</th>
-        <th>Type</th>
-        <th>Status</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let room of Rooms">
-        <td>{{ room.number }}</td>
-        <td>{{ room.type }}</td>
-        <td>{{ room.available ? 'Available' : 'Unavailable' }}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container mb-5 pb-5" style="margin-top: 4rem;">
+  <div class="card border-0 mx-auto w-100" style="max-width: 900px;">
+    <div class="card-header border-0 text-center pb-0 pt-4">
+      <h2 class="mb-2" style="font-family: 'Playfair Display', serif; font-size: 2.2rem;">Lista de Acomodações</h2>
+      <p class="text-muted mb-4">Acompanhe a disponibilidade e o status dos quartos do Hôtel L'Avenir.</p>
+    </div>
+    <div class="card-body p-5 pt-2">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover align-middle mb-0">
+          <thead class="table-custom">
+            <tr>
+              <th>Room Number</th>
+              <th>Type</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let room of Rooms">
+              <td class="fw-semibold">{{ room.number }}</td>
+              <td>{{ room.type }}</td>
+              <td>
+                <span class="badge" [ngClass]="room.available ? 'bg-success' : 'bg-danger'">
+                  {{ room.available ? 'Available' : 'Unavailable' }}
+                </span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,38 +1,51 @@
 /* Custom Elegant Styles */
 
 :root {
-  --primary-color: #2a0000;
+  --primary-color: #9e1b1b;
   --gold-accent: #d4af37;
-  --light-gray: #f8f9fa;
-  --dark-text: #343a40;
+  --light-gray: rgba(255, 255, 255, 0.95);
+  --dark-text: #2c3e50;
+  --glass-bg: rgba(255, 255, 255, 0.90);
+  --glass-border: rgba(255, 255, 255, 0.4);
 }
 
 body {
   background-color: var(--light-gray);
+  /* Fallback */
 }
 
+/* Glassmorphism Cards */
 .card {
-  border: 1px solid var(--primary-color);
-  border-radius: 0;
+  background: var(--glass-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
 }
 
 .card-header {
-  background-color: var(--primary-color);
-  color: white;
-  border-bottom: 2px solid var(--gold-accent);
-  border-radius: 0 !important;
+  background-color: transparent;
+  color: var(--dark-text);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
 }
 
 .btn-primary {
   background-color: var(--primary-color);
   border-color: var(--primary-color);
-  border-radius: 0;
-  transition: background-color 0.3s, border-color 0.3s;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  padding: 0.6rem 1.5rem;
 }
 
 .btn-primary:hover {
-  background-color: #1a0000;
-  border-color: #1a0000;
+  background-color: #7a1515;
+  border-color: #7a1515;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(158, 27, 27, 0.3);
 }
 
 .form-control:focus {
@@ -43,4 +56,64 @@ body {
 .form-label {
   color: var(--dark-text);
   font-weight: bold;
+}
+
+/* --- Added Layout and Palette Utilities --- */
+.bg-primary {
+  background-color: var(--primary-color) !important;
+}
+
+.text-primary {
+  color: var(--primary-color) !important;
+}
+
+.btn-success {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+}
+
+.btn-success:hover,
+.btn-success:focus {
+  background-color: #7a1515;
+  border-color: #7a1515;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(158, 27, 27, 0.3);
+}
+
+.form-control,
+.form-select {
+  border-radius: 6px;
+  border: 1px solid #ced4da;
+  padding: 0.6rem;
+}
+
+/* Navbar overrrides */
+.navbar-light .navbar-nav .nav-link {
+  color: #333;
+  transition: color 0.3s;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+}
+
+.navbar-light .navbar-nav .nav-link:hover,
+.navbar-light .navbar-nav .nav-link.active {
+  color: var(--primary-color) !important;
+}
+
+.navbar-light .navbar-brand {
+  color: #222 !important;
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  letter-spacing: -0.5px;
+}
+
+/* Custom Table */
+.table-custom th {
+  background-color: var(--primary-color) !important;
+  color: white !important;
+  border-bottom: 2px solid var(--gold-accent) !important;
 }

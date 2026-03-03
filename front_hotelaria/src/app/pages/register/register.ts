@@ -1,25 +1,33 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { RegistrationFlow } from '../../services/registration-flow';
-import { RoomService, Room } from '../../services/room-service'; // Import RoomService and Room
+import { RoomService, Room } from '../../services/room-service';
+import { guestService, Guest } from '../../services/guest-service';
 
 @Component({
   selector: 'app-register',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, CommonModule, FormsModule],
   templateUrl: './register.html',
   styleUrl: './register.css'
 })
-export class Register implements OnInit { // Implement OnInit
+export class Register implements OnInit {
   registerForm: FormGroup;
-  roomAvailable: boolean = false; // New property to track availability
-  availabilityMessage: string = ''; // New property for messages
+  roomAvailable: boolean = false;
+  availabilityMessage: string = '';
+  isExistingGuest: boolean = false;
+  cpfSearch: string = '';
+  foundGuest: Guest | null = null;
+  searchMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private registrationFlow: RegistrationFlow,
-    private roomService: RoomService // Inject RoomService
+    private roomService: RoomService,
+    private guestSvc: guestService
   ) {
     this.registerForm = this.fb.group({
       checkInDate: ['', Validators.required],
@@ -35,6 +43,42 @@ export class Register implements OnInit { // Implement OnInit
   ngOnInit(): void {
     this.registerForm.get('roomType')?.valueChanges.subscribe(roomType => {
       this.checkRoomAvailability(roomType);
+    });
+  }
+
+  toggleExistingGuest(): void {
+    this.isExistingGuest = !this.isExistingGuest;
+    this.foundGuest = null;
+    this.searchMessage = '';
+    this.cpfSearch = '';
+    if (!this.isExistingGuest) {
+      this.registerForm.reset();
+    }
+  }
+
+  searchByCpf(): void {
+    if (!this.cpfSearch || this.cpfSearch.length !== 11) {
+      this.searchMessage = 'Digite um CPF válido com 11 dígitos.';
+      this.foundGuest = null;
+      return;
+    }
+
+    this.guestSvc.getGuests().subscribe(guests => {
+      const match = guests.find(g => g.cpf === this.cpfSearch);
+      if (match) {
+        this.foundGuest = match;
+        this.searchMessage = '';
+        // Auto-fill the form with the found guest data
+        this.registerForm.patchValue({
+          name: match.name,
+          email: match.email,
+          telephone: match.telephone,
+          cpf: match.cpf
+        });
+      } else {
+        this.foundGuest = null;
+        this.searchMessage = 'Nenhum hóspede encontrado com esse CPF.';
+      }
     });
   }
 
@@ -61,16 +105,10 @@ export class Register implements OnInit { // Implement OnInit
     if (this.registerForm.valid) {
       const guestData = this.registerForm.value;
       console.log("guestData:", guestData);
-        // 3. GUARDE OS DADOS NO SERVIÇO COMPARTILHADO
       this.registrationFlow.setGuestData(this.registerForm.value);
-        // 4. NAVEGUE PARA A PÁGINA DE PAGAMENTO
-      this.router.navigate(['/payment']); // Verifique se '/payment' é a sua rota correta
-      
-
+      this.router.navigate(['/payment']);
     } else {
-      // Se o formulário for inválido, mostramos um erro no console
       console.error('Formulário inválido. Por favor, corrija os campos.');
-      // O ideal aqui seria marcar os campos inválidos em vermelho na tela
     }
   }
 }

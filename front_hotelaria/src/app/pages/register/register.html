@@ -1,51 +1,96 @@
-<div class="container mt-5">
-  <div class="card">
-    <div class="card-header">
-      <h2 class="text-center">Guest Registration</h2>
+<div class="container mb-5 pb-5" style="margin-top: 4rem;">
+  <div class="card border-0 mx-auto w-100" style="max-width: 800px;">
+    <div class="card-header border-0 text-center pb-0 pt-4">
+      <h2 class="mb-2" style="font-family: 'Playfair Display', serif; font-size: 2.2rem;">Faça seu Registro de Hóspede
+      </h2>
+      <p class="text-muted mb-4">Seja bem-vindo ao Hotel Overlook. Preencha seus dados para completar sua reserva.</p>
     </div>
-    <div class="card-body">
+    <div class="card-body p-5 pt-2">
+
+      <!-- Toggle Switch: Existing Guest -->
+      <div class="d-flex align-items-center justify-content-between mb-4 p-3 rounded"
+        style="background: rgba(158,27,27,0.06); border: 1px solid rgba(158,27,27,0.15);">
+        <span class="fw-semibold" style="color: #333;">O hóspede já possui cadastro?</span>
+        <div class="form-check form-switch mb-0">
+          <input class="form-check-input" type="checkbox" role="switch" id="existingGuestToggle"
+            [checked]="isExistingGuest" (change)="toggleExistingGuest()"
+            style="width: 3em; height: 1.5em; cursor: pointer;">
+        </div>
+      </div>
+
+      <!-- CPF Search (visible when toggle is ON) -->
+      <div *ngIf="isExistingGuest" class="mb-4 p-3 rounded"
+        style="background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.08);">
+        <label class="form-label fw-semibold">Buscar por CPF</label>
+        <div class="input-group">
+          <input type="text" class="form-control" placeholder="Digite os 11 dígitos do CPF" [(ngModel)]="cpfSearch"
+            maxlength="11">
+          <button class="btn btn-primary" type="button" (click)="searchByCpf()">Buscar</button>
+        </div>
+        <small *ngIf="searchMessage" class="text-danger mt-2 d-block">{{ searchMessage }}</small>
+        <div *ngIf="foundGuest" class="mt-3 p-2 rounded"
+          style="background: rgba(40,167,69,0.1); border: 1px solid rgba(40,167,69,0.2);">
+          <small class="text-success fw-bold">✓ Hóspede encontrado: {{ foundGuest.name }} — dados preenchidos
+            automaticamente.</small>
+        </div>
+      </div>
+
       <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+        <!-- Section 1: Personal Info -->
+        <h6 class="text-muted text-uppercase mb-3" style="letter-spacing: 1px; font-size: 0.8rem;">1 — Informações
+          Pessoais</h6>
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="checkInDate" class="form-label">Check-in Date</label>
-            <input type="date" id="checkInDate" class="form-control" formControlName="checkInDate">
+            <label for="name" class="form-label">Nome Completo</label>
+            <input type="text" id="name" class="form-control" formControlName="name"
+              [readonly]="isExistingGuest && foundGuest">
           </div>
           <div class="col-md-6 mb-3">
-            <label for="checkOutDate" class="form-label">Check-out Date</label>
-            <input type="date" id="checkOutDate" class="form-control" formControlName="checkOutDate">
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="name" class="form-label">Name</label>
-          <input type="text" id="name" class="form-control" formControlName="name">
-        </div>
-        <div class="row">
-          <div class="col-md-6 mb-3">
-            <label for="telephone" class="form-label">Telephone</label>
-            <input type="tel" id="phone" class="form-control" formControlName="telephone">
-          </div>
-          <div class="col-md-6 mb-3">
-            <label for="email" class="form-label">Email</label>
-            <input type="email" id="email" class="form-control" formControlName="email">
+            <label for="email" class="form-label">E-mail</label>
+            <input type="email" id="email" class="form-control" formControlName="email"
+              [readonly]="isExistingGuest && foundGuest">
           </div>
         </div>
         <div class="row">
           <div class="col-md-6 mb-3">
-            <label for="roomType" class="form-label">Room Type</label>
-            <select id="roomType" class="form-select" formControlName="roomType">
-              <option value="normal">Normal</option>
-              <option value="plus">Plus</option>
-              <option value="max">Max</option>
-              <option value="presidential_suite">Presidential Suite</option>
-            </select>
+            <label for="telephone" class="form-label">Telefone/WhatsApp</label>
+            <input type="tel" id="phone" class="form-control" formControlName="telephone"
+              [readonly]="isExistingGuest && foundGuest">
           </div>
           <div class="col-md-6 mb-3">
             <label for="cpf" class="form-label">CPF</label>
-            <input type="text" id="cpf" class="form-control" formControlName="cpf" placeholder="11 digits">
+            <input type="text" id="cpf" class="form-control" formControlName="cpf" placeholder="11 dígitos"
+              [readonly]="isExistingGuest && foundGuest">
           </div>
         </div>
-        <div class="d-grid">
-          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Register</button>
+
+        <!-- Section 2: Stay Details -->
+        <h6 class="text-muted text-uppercase mt-4 mb-3" style="letter-spacing: 1px; font-size: 0.8rem;">2 — Dados da
+          Estadia</h6>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <label for="checkInDate" class="form-label">Data de Chegada</label>
+            <input type="date" id="checkInDate" class="form-control" formControlName="checkInDate">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="checkOutDate" class="form-label">Data de Partida</label>
+            <input type="date" id="checkOutDate" class="form-control" formControlName="checkOutDate">
+          </div>
+          <div class="col-md-4 mb-3">
+            <label for="roomType" class="form-label">Tipo de Quarto</label>
+            <select id="roomType" class="form-select" formControlName="roomType">
+              <option value="" disabled selected>Selecione...</option>
+              <option value="normal">Normal</option>
+              <option value="plus">Plus</option>
+              <option value="max">Max</option>
+              <option value="presidential_suite">Suíte Presidencial</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="d-flex justify-content-end mt-4">
+          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.valid">Finalizar Registro</button>
         </div>
       </form>
     </div>
