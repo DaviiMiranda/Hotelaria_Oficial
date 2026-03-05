@@ -22,6 +22,7 @@ export class BookingBar {
   currentMonth = signal(new Date().getMonth());
   currentYear = signal(new Date().getFullYear());
   selectingCheckOut = signal(false);
+  hoveredDay = signal<number | null>(null);
 
   monthNames = ['January', 'February', 'March', 'April', 'May', 'June',
     'July', 'August', 'September', 'October', 'November', 'December'];
@@ -97,10 +98,32 @@ export class BookingBar {
       this.checkOut.set('');
       this.selectingCheckOut.set(true);
     } else {
+      if (this.isDateDisabled(day)) return;
       this.checkOut.set(formatted);
       this.selectingCheckOut.set(false);
-      this.showDatePicker.set(false);
+      // Removed closing the picker as per user request
     }
+  }
+
+  onHoverDay(day: number | null) {
+    this.hoveredDay.set(day);
+  }
+
+  isDateDisabled(day: number | null): boolean {
+    if (!day) return true;
+    if (this.isPast(day)) return true;
+
+    if (this.selectingCheckOut() && this.checkIn()) {
+      const [m, d, y] = this.checkIn().split('/').map(Number);
+      const ciDate = new Date(y, m - 1, d);
+      ciDate.setHours(0, 0, 0, 0);
+
+      const date = new Date(this.currentYear(), this.currentMonth(), day);
+      date.setHours(0, 0, 0, 0);
+
+      return date <= ciDate;
+    }
+    return false;
   }
 
   isToday(day: number | null): boolean {
@@ -131,7 +154,7 @@ export class BookingBar {
 
   goToBooking() {
     if (!this.checkIn() || !this.checkOut()) {
-      alert('Por favor, defina as datas de check-in e check-out antes de continuar.');
+      alert('Por favor, defina as das de check-in e check-out antes de continuar.');
       return;
     }
     this.router.navigate(['/booking'], {
@@ -153,18 +176,31 @@ export class BookingBar {
   }
 
   isInBetween(day: number | null): boolean {
-    if (!day || !this.checkIn() || !this.checkOut()) return false;
-    const date = new Date(this.currentYear(), this.currentMonth(), day);
-    date.setHours(0, 0, 0, 0);
+    if (!day || !this.checkIn()) return false;
 
     const [inM, inD, inY] = this.checkIn().split('/');
     const ciDate = new Date(+inY, +inM - 1, +inD);
     ciDate.setHours(0, 0, 0, 0);
 
-    const [outM, outD, outY] = this.checkOut().split('/');
-    const coDate = new Date(+outY, +outM - 1, +outD);
-    coDate.setHours(0, 0, 0, 0);
+    const currentDate = new Date(this.currentYear(), this.currentMonth(), day);
+    currentDate.setHours(0, 0, 0, 0);
 
-    return date > ciDate && date < coDate;
+    if (this.checkOut()) {
+      const [outM, outD, outY] = this.checkOut().split('/');
+      const coDate = new Date(+outY, +outM - 1, +outD);
+      coDate.setHours(0, 0, 0, 0);
+      return currentDate > ciDate && currentDate < coDate;
+    }
+
+    if (this.selectingCheckOut() && this.hoveredDay()) {
+      const hDate = new Date(this.currentYear(), this.currentMonth(), this.hoveredDay()!);
+      hDate.setHours(0, 0, 0, 0);
+
+      if (hDate > ciDate) {
+        return currentDate > ciDate && currentDate < hDate;
+      }
+    }
+
+    return false;
   }
 }
