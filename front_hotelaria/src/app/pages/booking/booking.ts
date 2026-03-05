@@ -7,6 +7,11 @@ interface RoomOption {
   size: string;
   pricePerNight: number;
   image: string;
+  internet: string;
+  bathrooms: string;
+  roomService: string;
+  capacity: string;
+  bed: string;
 }
 
 @Component({
@@ -33,9 +38,21 @@ export class Booking implements OnInit {
   selectedRoomIndex = signal(0);
 
   rooms: RoomOption[] = [
-    { name: 'Standard', size: '28 m²', pricePerNight: 350, image: 'assets/rooms/standard_bedroom.png' },
-    { name: 'Deluxe', size: '42 m²', pricePerNight: 580, image: 'assets/rooms/deluxe_bedroom.png' },
-    { name: 'Suites', size: '64 m²', pricePerNight: 950, image: 'assets/rooms/suite_bedroom.png' },
+    {
+      name: 'Standard', size: '28 m²', pricePerNight: 350, image: 'assets/rooms/standard_bedroom.png',
+      internet: 'Free Wi-Fi (50 Mbps)', bathrooms: '1 Bathroom', roomService: 'Available 8AM-10PM',
+      capacity: 'Up to 2 Guests', bed: '1 Queen Bed'
+    },
+    {
+      name: 'Deluxe', size: '42 m²', pricePerNight: 580, image: 'assets/rooms/deluxe_bedroom.png',
+      internet: 'Fast Wi-Fi (150 Mbps)', bathrooms: '1 Spacious Bathroom', roomService: '24/7 Room Service',
+      capacity: 'Up to 3 Guests', bed: '1 King Bed'
+    },
+    {
+      name: 'Suites', size: '64 m²', pricePerNight: 950, image: 'assets/rooms/suite_bedroom.png',
+      internet: 'Premium Wi-Fi (300 Mbps)', bathrooms: '2 Bathrooms + Jacuzzi', roomService: 'VIP 24/7 Service',
+      capacity: 'Up to 4 Guests', bed: '1 King Bed + 1 Sofa Bed'
+    },
   ];
 
   selectedRoom = computed(() => this.rooms[this.selectedRoomIndex()]);

@@ -35,10 +35,19 @@
                     <div class="room-option" [class.selected]="i === selectedRoomIndex()" (click)="selectRoom(i)">
                         <img [src]="room.image" [alt]="room.name" class="room-option-img" />
                         <div class="room-option-info">
-                            <h3>{{ room.name }}</h3>
-                            <span class="room-option-size">{{ room.size }}</span>
-                            <span class="room-option-price">{{ formattedPrice(room.pricePerNight) }} <small>/
-                                    night</small></span>
+                            <div class="room-option-header">
+                                <h3>{{ room.name }}</h3>
+                                <span class="room-option-price">{{ formattedPrice(room.pricePerNight) }} <small>/
+                                        night</small></span>
+                            </div>
+                            <div class="room-features-grid">
+                                <span class="feature-item" title="Size">📐 {{ room.size }}</span>
+                                <span class="feature-item" title="Capacity">👥 {{ room.capacity }}</span>
+                                <span class="feature-item" title="Bed Type">🛏️ {{ room.bed }}</span>
+                                <span class="feature-item" title="Bathrooms">🚿 {{ room.bathrooms }}</span>
+                                <span class="feature-item" title="Internet">🌐 {{ room.internet }}</span>
+                                <span class="feature-item" title="Room Service">🛎️ {{ room.roomService }}</span>
+                            </div>
                         </div>
                         <div class="room-check">
                             @if (i === selectedRoomIndex()) {

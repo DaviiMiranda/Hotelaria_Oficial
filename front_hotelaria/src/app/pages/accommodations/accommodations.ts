@@ -12,11 +12,14 @@ export class Accommodations {
     {
       name: 'Suites',
       size: '64 m²',
+      price: 'R$ 1.500,00',
       description: 'King size bed, living room, walk-in closet, bathtub and voice automation. Curated by Brazilian art and design, the suite is ideal for couples, extended stays, or solo travelers looking for more space. It seats up to three people.',
       images: [
+        'assets/rooms/room_suite.png',
         'assets/rooms/suite_bedroom.png',
-        'assets/rooms/suite_bathroom.png',
         'assets/rooms/suite_living.png',
+        'assets/rooms/suite_bathroom.png',
+        'assets/rooms/room_suite_bath.png',
       ],
       details: [
         'King size bed',
@@ -41,8 +44,11 @@ export class Accommodations {
     {
       name: 'Deluxe',
       size: '42 m²',
+      price: 'R$ 900,00',
       description: 'A spacious room with a queen bed, panoramic city views, and modern amenities. The Deluxe room is designed for guests seeking comfort and style with a touch of luxury. It seats up to two people.',
       images: [
+        'assets/rooms/room_deluxe.png',
+        'assets/rooms/room_deluxe_view.png',
         'assets/rooms/deluxe_bedroom.png',
         'assets/rooms/deluxe_workspace.png',
         'assets/rooms/deluxe_bathroom.png',
@@ -65,10 +71,13 @@ export class Accommodations {
     {
       name: 'Standard',
       size: '28 m²',
+      price: 'R$ 600,00',
       description: 'A cozy and elegant room with a queen bed, natural wood furniture, and a bright atmosphere. Perfect for solo travelers or couples looking for a comfortable retreat in the heart of the city.',
       images: [
+        'assets/rooms/room_standard.png',
         'assets/rooms/standard_bedroom.png',
         'assets/rooms/standard_bathroom.png',
+        'assets/rooms/room_standard_detail.png',
       ],
       details: [
         'Queen size bed',

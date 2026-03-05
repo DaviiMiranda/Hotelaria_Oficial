@@ -1,8 +1,10 @@
 import { Component, input, signal, computed } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 export interface RoomType {
   name: string;
   size: string;
+  price?: string;
   description: string;
   images: string[];
   details: string[];
@@ -10,7 +12,7 @@ export interface RoomType {
 
 @Component({
   selector: 'app-room-card',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './room-card.html',
   styleUrl: './room-card.css'
 })

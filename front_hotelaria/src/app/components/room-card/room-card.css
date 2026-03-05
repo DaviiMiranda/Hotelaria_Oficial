@@ -115,8 +115,16 @@
 .room-title {
     font-size: 1.8rem;
     font-weight: 400;
-    margin-bottom: 1.25rem;
+    margin-bottom: 0.5rem;
     letter-spacing: 0.02em;
+}
+
+.room-price {
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: #a88555;
+    margin-bottom: 1.25rem;
+    letter-spacing: 0.05em;
 }
 
 .room-description {

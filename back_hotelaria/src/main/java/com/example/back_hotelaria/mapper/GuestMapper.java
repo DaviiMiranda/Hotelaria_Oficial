@@ -12,13 +12,9 @@ public class GuestMapper {
     public Guest toEntity(GuestDTO dto) {
         Guest guest = new Guest();
         guest.setName(dto.getName());
-        guest.setCheckInDate(dto.getCheckInDate());
-        guest.setCheckOutDate(dto.getCheckOutDate());
         guest.setTelephone(dto.getTelephone());
         guest.setEmail(dto.getEmail());
         guest.setCPF(dto.getCpf());
-        guest.setRoomNumber(dto.getRoomNumber());
-        guest.setRoomType(dto.getRoomType());
         return guest;
     }
 
@@ -27,13 +23,9 @@ public class GuestMapper {
         GuestResponseDTO dto = new GuestResponseDTO();
         dto.setId(entity.getId());
         dto.setName(entity.getName());
-        dto.setCheckInDate(entity.getCheckInDate());
-        dto.setCheckOutDate(entity.getCheckOutDate());
         dto.setTelephone(entity.getTelephone());
         dto.setEmail(entity.getEmail());
         dto.setCpf(entity.getCPF());
-        dto.setRoomNumber(entity.getRoomNumber());
-        dto.setRoomType(entity.getRoomType());
         return dto;
     }
 }

@@ -88,9 +88,9 @@
 
 .room-option {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 1.5rem;
-    padding: 1rem 1.5rem;
+    padding: 1.2rem 1.5rem;
     background: #fff;
     border: 2px solid transparent;
     cursor: pointer;
@@ -107,40 +107,55 @@
 }
 
 .room-option-img {
-    width: 120px;
-    height: 80px;
+    width: 140px;
+    height: 110px;
     object-fit: cover;
-    border-radius: 2px;
+    border-radius: 4px;
 }
 
 .room-option-info {
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 0.5rem;
 }
 
-.room-option-info h3 {
-    font-size: 1.1rem;
+.room-option-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-option-header h3 {
+    font-size: 1.15rem;
     font-weight: 500;
-}
-
-.room-option-size {
-    font-size: 0.8rem;
-    color: #888;
 }
 
 .room-option-price {
-    font-size: 1rem;
-    font-weight: 500;
+    font-size: 1.05rem;
+    font-weight: 600;
     color: var(--text-dark);
-    margin-top: 0.25rem;
 }
 
 .room-option-price small {
-    font-weight: 300;
+    font-weight: 400;
     font-size: 0.8rem;
     color: #888;
+}
+
+.room-features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-top: 0.25rem;
+}
+
+.feature-item {
+    font-size: 0.8rem;
+    color: #555;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .room-check {

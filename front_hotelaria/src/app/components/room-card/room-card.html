@@ -17,12 +17,15 @@
         <div class="room-info-header">
             <div>
                 <h2 class="room-title">{{ room().name }}, {{ room().size }}</h2>
+                @if (room().price) {
+                <p class="room-price">{{ room().price }} / night</p>
+                }
                 <p class="room-description">{{ room().description }}</p>
             </div>
-            <button class="book-btn-outline">Book</button>
+            <button class="book-btn-outline" routerLink="/booking">Book</button>
         </div>
 
-        <button class="book-btn-filled">Book</button>
+        <button class="book-btn-filled" routerLink="/booking">Book</button>
 
         <div class="room-details">
             <h3>Accommodation details</h3>

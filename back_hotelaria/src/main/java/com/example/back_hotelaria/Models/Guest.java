@@ -1,5 +1,6 @@
 package com.example.back_hotelaria.Models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,11 +16,12 @@ public class Guest {
     private Long id;
 
     private String name;
+    
+    @Column(unique = true)
     private String email;
+    
     private String telephone;
+    
+    @Column(unique = true)
     private String CPF;
-    private String checkInDate;
-    private String checkOutDate;
-    private String roomNumber;
-    private String roomType;
 }

@@ -1,4 +1,5 @@
 package com.example.back_hotelaria.mapper;
+
 import com.example.back_hotelaria.dto.RoomDTO;
 import com.example.back_hotelaria.Models.Room;
 import com.example.back_hotelaria.dto.RoomResponseDTO;
@@ -18,10 +19,11 @@ public class RoomMapper {
 
     public RoomResponseDTO toResponseDTO(Room entity) {
         RoomResponseDTO dto = new RoomResponseDTO();
-        dto.setRoomNumber(dto.getRoomNumber());
-        dto.setType(dto.getType());
-        dto.setAvailable(dto.getAvailable());
+        dto.setRoomNumber(entity.getRoomNumber());
+        dto.setType(entity.getType());
+        dto.setAvailable(entity.isAvailable());
+        dto.setPrice(entity.getPrice());
         return dto;
     }
-    
+
 }

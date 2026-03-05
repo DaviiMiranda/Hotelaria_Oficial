@@ -6,11 +6,7 @@ import lombok.Data;
 @Data
 public class GuestDTO {
     private String name;
-    private String checkInDate;
-    private String checkOutDate;
     private String telephone;
     private String email;
     private String cpf;
-    private String roomNumber;
-    private String roomType;
 }

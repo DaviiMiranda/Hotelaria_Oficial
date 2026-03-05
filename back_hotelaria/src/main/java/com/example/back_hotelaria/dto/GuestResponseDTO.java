@@ -7,11 +7,7 @@ import lombok.Data;
 public class GuestResponseDTO {
     private Long id;
     private String name;
-    private String checkInDate;
-    private String checkOutDate;
     private String telephone;
     private String email;
     private String cpf;
-    private String roomNumber;
-    private String roomType;
 }

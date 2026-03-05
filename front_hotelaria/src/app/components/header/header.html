@@ -7,7 +7,7 @@
             <ul>
                 <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Hotel</a></li>
                 <li><a routerLink="/accommodations" routerLinkActive="active">Accommodations</a></li>
-                <li><a href="#">Sarau Bar</a></li>
+                <li><a [routerLink]="['/gastronomy']" routerLinkActive="active">Sarau Bar</a></li>
                 <li><a routerLink="/gastronomy" routerLinkActive="active">Gastronomy</a></li>
                 <li><a routerLink="/wellness" routerLinkActive="active">Wellness & Spa</a></li>
                 <li><a routerLink="/events" routerLinkActive="active">Events</a></li>

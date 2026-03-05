@@ -143,4 +143,28 @@ export class BookingBar {
       }
     });
   }
+
+  isSelected(day: number | null): boolean {
+    if (!day) return false;
+    const m = (this.currentMonth() + 1).toString().padStart(2, '0');
+    const d = day.toString().padStart(2, '0');
+    const formatted = `${m}/${d}/${this.currentYear()}`;
+    return this.checkIn() === formatted || this.checkOut() === formatted;
+  }
+
+  isInBetween(day: number | null): boolean {
+    if (!day || !this.checkIn() || !this.checkOut()) return false;
+    const date = new Date(this.currentYear(), this.currentMonth(), day);
+    date.setHours(0, 0, 0, 0);
+
+    const [inM, inD, inY] = this.checkIn().split('/');
+    const ciDate = new Date(+inY, +inM - 1, +inD);
+    ciDate.setHours(0, 0, 0, 0);
+
+    const [outM, outD, outY] = this.checkOut().split('/');
+    const coDate = new Date(+outY, +outM - 1, +outD);
+    coDate.setHours(0, 0, 0, 0);
+
+    return date > ciDate && date < coDate;
+  }
 }

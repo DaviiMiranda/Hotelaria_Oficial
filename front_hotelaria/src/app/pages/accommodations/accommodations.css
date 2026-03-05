@@ -75,7 +75,7 @@
 .rooms-list {
     display: flex;
     flex-direction: column;
-    gap: 3rem;
+    gap: 6rem;
     padding: 0 4rem;
     max-width: 1400px;
     margin: 0 auto;

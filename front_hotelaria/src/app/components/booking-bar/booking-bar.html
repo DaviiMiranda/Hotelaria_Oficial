@@ -38,7 +38,8 @@
             <div class="calendar-grid">
                 @for (day of calendarDays(); track $index) {
                 @if (day) {
-                <button class="cal-day" [class.today]="isToday(day)" [class.past]="isPast(day)" [disabled]="isPast(day)"
+                <button class="cal-day" [class.today]="isToday(day)" [class.past]="isPast(day)"
+                    [class.selected]="isSelected(day)" [class.in-between]="isInBetween(day)" [disabled]="isPast(day)"
                     (click)="selectDay(day)">
                     {{ day }}
                 </button>

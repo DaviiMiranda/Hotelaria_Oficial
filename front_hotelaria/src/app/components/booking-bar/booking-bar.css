@@ -181,8 +181,8 @@
 }
 
 .cal-day.today {
-    background: var(--primary-color);
-    color: var(--text-dark);
+    background: #FFFFFF;
+    color: #000000;
     font-weight: 600;
 }
 
@@ -193,6 +193,31 @@
 
 .cal-day.empty {
     cursor: default;
+}
+
+.cal-day.selected {
+    background: #ff4d4d;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.cal-day.in-between {
+    background: rgba(255, 77, 77, 0.15);
+    color: var(--text-light);
+    border-radius: 0;
+}
+
+/* Adjust borders so the path looks continuous if multiple days are selected */
+.cal-day.selected:first-child,
+.cal-day.in-between:first-child {
+    border-top-left-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+
+.cal-day.selected:last-child,
+.cal-day.in-between:last-child {
+    border-top-right-radius: 50%;
+    border-bottom-right-radius: 50%;
 }
 
 .calendar-hint {
