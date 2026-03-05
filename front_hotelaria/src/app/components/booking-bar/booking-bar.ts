@@ -130,6 +130,10 @@ export class BookingBar {
   }
 
   goToBooking() {
+    if (!this.checkIn() || !this.checkOut()) {
+      alert('Por favor, defina as datas de check-in e check-out antes de continuar.');
+      return;
+    }
     this.router.navigate(['/booking'], {
       queryParams: {
         checkIn: this.checkIn(),
