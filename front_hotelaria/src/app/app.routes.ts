@@ -1,15 +1,21 @@
 import { Routes } from '@angular/router';
-import { Register } from './pages/register/register';
-import { Guests } from './pages/guests/guests';
-import { Rooms } from './pages/rooms/rooms';
-import { Payment } from './pages/payment/payment';
-import { Dashboard } from './pages/dashboard/dashboard';
+import { Home } from './pages/home/home';
+import { Accommodations } from './pages/accommodations/accommodations';
+import { Gastronomy } from './pages/gastronomy/gastronomy';
+import { Wellness } from './pages/wellness/wellness';
+import { Events } from './pages/events/events';
+import { Experiences } from './pages/experiences/experiences';
+import { Contact } from './pages/contact/contact';
+import { Booking } from './pages/booking/booking';
 
 export const routes: Routes = [
-    { path: '', redirectTo: 'register', pathMatch: 'full' },
-    { path: 'dashboard', component: Dashboard },
-    { path: 'register', component: Register },
-    { path: 'guests', component: Guests },
-    { path: 'rooms', component: Rooms },
-    { path: 'payment', component: Payment }
+    { path: '', component: Home, pathMatch: 'full' },
+    { path: 'accommodations', component: Accommodations },
+    { path: 'gastronomy', component: Gastronomy },
+    { path: 'wellness', component: Wellness },
+    { path: 'events', component: Events },
+    { path: 'experiences', component: Experiences },
+    { path: 'contact', component: Contact },
+    { path: 'booking', component: Booking },
+    { path: '**', redirectTo: '' }
 ];

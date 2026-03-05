@@ -1,0 +1,82 @@
+<div class="booking-bar">
+    <div class="booking-container">
+        <div class="booking-label">
+            <span>MAKE YOUR RESERVATION</span>
+        </div>
+
+        <div class="booking-inputs">
+            <!-- Date Picker -->
+            <div class="booking-field date-field" (click)="toggleDatePicker()">
+                <span class="field-value">{{ dateDisplay() }}</span>
+                <span class="chevron" [class.open]="showDatePicker()"></span>
+            </div>
+
+            <!-- Guest Picker -->
+            <div class="booking-field guest-field" (click)="toggleGuestPicker()">
+                <span class="field-value">{{ guestDisplay() }}</span>
+                <span class="chevron" [class.open]="showGuestPicker()"></span>
+            </div>
+        </div>
+
+        <div class="booking-action">
+            <button class="book-btn" (click)="goToBooking()">BOOK</button>
+        </div>
+    </div>
+
+    <!-- Date Picker Dropdown -->
+    @if (showDatePicker()) {
+    <div class="picker-dropdown date-picker-dropdown">
+        <div class="calendar">
+            <div class="calendar-header">
+                <button class="cal-nav" (click)="prevMonth()">&lt;</button>
+                <span class="cal-title">{{ currentMonthName() }} {{ currentYear() }}</span>
+                <button class="cal-nav" (click)="nextMonth()">&gt;</button>
+            </div>
+            <div class="calendar-weekdays">
+                <span>SUN</span><span>MON</span><span>TUE</span><span>WED</span><span>THU</span><span>FRI</span><span>SAT</span>
+            </div>
+            <div class="calendar-grid">
+                @for (day of calendarDays(); track $index) {
+                @if (day) {
+                <button class="cal-day" [class.today]="isToday(day)" [class.past]="isPast(day)" [disabled]="isPast(day)"
+                    (click)="selectDay(day)">
+                    {{ day }}
+                </button>
+                } @else {
+                <span class="cal-day empty"></span>
+                }
+                }
+            </div>
+            <div class="calendar-hint">
+                @if (!selectingCheckOut()) {
+                <span>Select check-in date</span>
+                } @else {
+                <span>Select check-out date</span>
+                }
+            </div>
+        </div>
+    </div>
+    }
+
+    <!-- Guest Picker Dropdown -->
+    @if (showGuestPicker()) {
+    <div class="picker-dropdown guest-picker-dropdown">
+        <div class="guest-row">
+            <span class="guest-label">Adults</span>
+            <div class="guest-controls">
+                <button class="guest-btn" (click)="changeAdults(-1)">−</button>
+                <span class="guest-count">{{ adults() }}</span>
+                <button class="guest-btn" (click)="changeAdults(1)">+</button>
+            </div>
+        </div>
+        <div class="guest-row">
+            <span class="guest-label">Kids</span>
+            <div class="guest-controls">
+                <button class="guest-btn" (click)="changeKids(-1)">−</button>
+                <span class="guest-count">{{ kids() }}</span>
+                <button class="guest-btn" (click)="changeKids(1)">+</button>
+            </div>
+        </div>
+    </div>
+    }
+</div>

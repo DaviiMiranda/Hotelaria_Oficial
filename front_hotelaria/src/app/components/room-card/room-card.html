@@ -1,0 +1,36 @@
+<article class="room-card">
+    <div class="room-carousel">
+        <div class="carousel-viewport">
+            <img [src]="currentImage()" [alt]="room().name" class="carousel-image" />
+        </div>
+        <button class="carousel-nav prev" (click)="prevSlide()">&#8249;</button>
+        <button class="carousel-nav next" (click)="nextSlide()">&#8250;</button>
+        <div class="carousel-dots">
+            @for (img of room().images; track $index) {
+            <button class="dot" [class.active]="$index === currentSlide()" (click)="goToSlide($index)">
+            </button>
+            }
+        </div>
+    </div>
+
+    <div class="room-info">
+        <div class="room-info-header">
+            <div>
+                <h2 class="room-title">{{ room().name }}, {{ room().size }}</h2>
+                <p class="room-description">{{ room().description }}</p>
+            </div>
+            <button class="book-btn-outline">Book</button>
+        </div>
+
+        <button class="book-btn-filled">Book</button>
+
+        <div class="room-details">
+            <h3>Accommodation details</h3>
+            <ul>
+                @for (detail of room().details; track detail) {
+                <li>{{ detail }}</li>
+                }
+            </ul>
+        </div>
+    </div>
+</article>

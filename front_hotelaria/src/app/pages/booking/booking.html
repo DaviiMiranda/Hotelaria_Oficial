@@ -1,0 +1,124 @@
+<section class="booking-page">
+    <div class="booking-container">
+
+        <!-- Left: Guest Info + Room Selection -->
+        <div class="booking-left">
+            <h1 class="page-title">Make Your Reservation</h1>
+
+            <!-- Stay Summary -->
+            <div class="stay-summary">
+                <div class="summary-item">
+                    <span class="summary-label">Check-in</span>
+                    <span class="summary-value">{{ checkIn() || '—' }}</span>
+                </div>
+                <div class="summary-divider">→</div>
+                <div class="summary-item">
+                    <span class="summary-label">Check-out</span>
+                    <span class="summary-value">{{ checkOut() || '—' }}</span>
+                </div>
+                <div class="summary-divider"></div>
+                <div class="summary-item">
+                    <span class="summary-label">Guests</span>
+                    <span class="summary-value">{{ adults() }} Adults, {{ kids() }} Kids</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Nights</span>
+                    <span class="summary-value">{{ numberOfNights() }}</span>
+                </div>
+            </div>
+
+            <!-- Room Selection -->
+            <div class="section">
+                <h2 class="section-title">Choose Your Room</h2>
+                <div class="room-options">
+                    @for (room of rooms; track room.name; let i = $index) {
+                    <div class="room-option" [class.selected]="i === selectedRoomIndex()" (click)="selectRoom(i)">
+                        <img [src]="room.image" [alt]="room.name" class="room-option-img" />
+                        <div class="room-option-info">
+                            <h3>{{ room.name }}</h3>
+                            <span class="room-option-size">{{ room.size }}</span>
+                            <span class="room-option-price">{{ formattedPrice(room.pricePerNight) }} <small>/
+                                    night</small></span>
+                        </div>
+                        <div class="room-check">
+                            @if (i === selectedRoomIndex()) {
+                            <span class="check-icon">✓</span>
+                            }
+                        </div>
+                    </div>
+                    }
+                </div>
+            </div>
+
+            <!-- Guest Information -->
+            <div class="section">
+                <h2 class="section-title">Guest Information</h2>
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label>First Name *</label>
+                        <input type="text" [ngModel]="firstName()" (ngModelChange)="firstName.set($event)"
+                            placeholder="John" />
+                    </div>
+                    <div class="form-field">
+                        <label>Last Name *</label>
+                        <input type="text" [ngModel]="lastName()" (ngModelChange)="lastName.set($event)"
+                            placeholder="Doe" />
+                    </div>
+                    <div class="form-field">
+                        <label>Email *</label>
+                        <input type="email" [ngModel]="email()" (ngModelChange)="email.set($event)"
+                            placeholder="john.doe&#64;email.com" />
+                    </div>
+                    <div class="form-field">
+                        <label>Phone</label>
+                        <input type="tel" [ngModel]="phone()" (ngModelChange)="phone.set($event)"
+                            placeholder="+55 11 99999-9999" />
+                    </div>
+                </div>
+                <div class="form-field full-width">
+                    <label>Special Requests</label>
+                    <textarea [ngModel]="specialRequests()" (ngModelChange)="specialRequests.set($event)"
+                        placeholder="Any special requests or notes..." rows="3"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right: Price Summary -->
+        <div class="booking-right">
+            <div class="price-card">
+                <div class="price-card-header">
+                    <img [src]="selectedRoom().image" [alt]="selectedRoom().name" class="price-card-img" />
+                    <div class="price-card-room">
+                        <h3>{{ selectedRoom().name }}</h3>
+                        <span>{{ selectedRoom().size }}</span>
+                    </div>
+                </div>
+
+                <div class="price-breakdown">
+                    <div class="price-row">
+                        <span>{{ formattedPrice(selectedRoom().pricePerNight) }} × {{ numberOfNights() }} night{{
+                            numberOfNights() > 1 ? 's' : '' }}</span>
+                        <span>{{ formattedPrice(roomTotal()) }}</span>
+                    </div>
+                    <div class="price-row">
+                        <span>Taxes & fees (15%)</span>
+                        <span>{{ formattedPrice(taxesAndFees()) }}</span>
+                    </div>
+                    <div class="price-row total">
+                        <span>Total</span>
+                        <span>{{ formattedPrice(grandTotal()) }}</span>
+                    </div>
+                </div>
+
+                <button class="confirm-btn" [disabled]="!isFormValid()" (click)="confirmBooking()">
+                    Confirm Reservation
+                </button>
+
+                @if (!isFormValid()) {
+                <p class="form-hint">Please fill in the required fields and select dates to continue.</p>
+                }
+            </div>
+        </div>
+
+    </div>
+</section>

@@ -1,0 +1,82 @@
+.accommodations-page {
+    padding-top: 100px;
+    padding-bottom: 100px;
+    /* space for booking bar */
+    background-color: var(--bg-color-light);
+    color: var(--text-dark);
+}
+
+/* ============================= */
+/* Header Intro                  */
+/* ============================= */
+.acc-header {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 3rem 4rem 4rem;
+}
+
+.acc-title {
+    font-size: 0.85rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding-top: 0.5rem;
+}
+
+.acc-description {
+    font-size: 1.8rem;
+    font-weight: 300;
+    line-height: 1.4;
+    margin-bottom: 2rem;
+    max-width: 800px;
+    color: #333;
+}
+
+.acc-actions {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.btn-learn {
+    background-color: var(--text-dark);
+    color: var(--text-light);
+    padding: 0.75rem 2rem;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-learn:hover {
+    background-color: var(--primary-color);
+}
+
+.btn-book-link {
+    color: var(--text-dark);
+    border-bottom: 1px solid var(--text-dark) !important;
+    padding-bottom: 2px;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-book-link:hover {
+    color: var(--primary-color);
+    border-color: var(--primary-color) !important;
+}
+
+/* ============================= */
+/* Rooms List                    */
+/* ============================= */
+.rooms-list {
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    padding: 0 4rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}

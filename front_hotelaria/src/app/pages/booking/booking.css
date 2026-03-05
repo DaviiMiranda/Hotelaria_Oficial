@@ -1,0 +1,317 @@
+.booking-page {
+    padding-top: 100px;
+    padding-bottom: 120px;
+    background-color: var(--bg-color-light);
+    min-height: 100vh;
+    color: var(--text-dark);
+}
+
+.booking-container {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 3rem;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 4rem;
+}
+
+/* ============================== */
+/* Page Title                     */
+/* ============================== */
+.page-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    margin-bottom: 2rem;
+}
+
+/* ============================== */
+/* Stay Summary                   */
+/* ============================== */
+.stay-summary {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 2rem;
+    background: #fff;
+    border: 1px solid #e0dcd7;
+    margin-bottom: 3rem;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.summary-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #888;
+}
+
+.summary-value {
+    font-size: 0.95rem;
+    font-weight: 500;
+}
+
+.summary-divider {
+    color: #bbb;
+    font-size: 1.2rem;
+}
+
+/* ============================== */
+/* Sections                       */
+/* ============================== */
+.section {
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid #ddd;
+}
+
+/* ============================== */
+/* Room Options                   */
+/* ============================== */
+.room-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.room-option {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 1.5rem;
+    background: #fff;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.room-option:hover {
+    border-color: #ccc;
+}
+
+.room-option.selected {
+    border-color: var(--primary-color);
+    background: #faf8f5;
+}
+
+.room-option-img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.room-option-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.room-option-info h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.room-option-size {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.room-option-price {
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-dark);
+    margin-top: 0.25rem;
+}
+
+.room-option-price small {
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.room-check {
+    width: 32px;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.check-icon {
+    width: 28px;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--primary-color);
+    color: #fff;
+    border-radius: 50%;
+    font-size: 0.85rem;
+    font-weight: 700;
+}
+
+/* ============================== */
+/* Form                           */
+/* ============================== */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-field.full-width {
+    margin-top: 1.5rem;
+}
+
+.form-field label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #666;
+    font-weight: 500;
+}
+
+.form-field input,
+.form-field textarea {
+    font-family: inherit;
+    font-size: 0.95rem;
+    padding: 0.85rem 1rem;
+    border: 1px solid #d4d0cb;
+    background: #fff;
+    outline: none;
+    transition: border-color 0.3s ease;
+    color: var(--text-dark);
+}
+
+.form-field input:focus,
+.form-field textarea:focus {
+    border-color: var(--primary-color);
+}
+
+.form-field textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* ============================== */
+/* Price Card (Right Sidebar)     */
+/* ============================== */
+.booking-right {
+    position: relative;
+}
+
+.price-card {
+    position: sticky;
+    top: 120px;
+    background: #fff;
+    border: 1px solid #e0dcd7;
+    padding: 0;
+    overflow: hidden;
+}
+
+.price-card-header {
+    display: flex;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.price-card-img {
+    width: 100px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 2px;
+}
+
+.price-card-room {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+}
+
+.price-card-room h3 {
+    font-size: 1.1rem;
+    font-weight: 500;
+}
+
+.price-card-room span {
+    font-size: 0.8rem;
+    color: #888;
+}
+
+.price-breakdown {
+    padding: 1.5rem;
+}
+
+.price-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9rem;
+    padding: 0.6rem 0;
+    color: #555;
+}
+
+.price-row+.price-row {
+    border-top: 1px solid #f0f0f0;
+}
+
+.price-row.total {
+    border-top: 2px solid #ddd;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    padding-top: 1rem;
+    margin-top: 0.5rem;
+}
+
+.confirm-btn {
+    display: block;
+    width: 100%;
+    padding: 1.1rem;
+    font-size: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    background: var(--text-dark);
+    color: var(--text-light);
+    border: none;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.confirm-btn:hover:not(:disabled) {
+    background: var(--primary-color);
+}
+
+.confirm-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.form-hint {
+    font-size: 0.75rem;
+    color: #999;
+    text-align: center;
+    padding: 1rem 1.5rem;
+    line-height: 1.4;
+}

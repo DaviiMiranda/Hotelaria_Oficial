@@ -1,0 +1,21 @@
+<section class="accommodations-page">
+    <div class="acc-header">
+        <div class="acc-title">ACCOMMODATIONS</div>
+        <div class="acc-description-area">
+            <p class="acc-description">
+                Works of art from the Overlook collection, prospected design and technology. Curated accommodations with
+                local identity.
+            </p>
+            <div class="acc-actions">
+                <button class="btn-learn">Learn more</button>
+                <button class="btn-book-link">Book</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="rooms-list">
+        @for (room of rooms; track room.name) {
+        <app-room-card [room]="room" />
+        }
+    </div>
+</section>

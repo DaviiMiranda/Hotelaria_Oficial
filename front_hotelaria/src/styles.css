@@ -1,12 +1,67 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap');
 
-body {
-    background-image: url('assets/luxury_hotel_background.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+:root {
+    --primary-color: #CBC0AD;
+    --bg-color-dark: #333333;
+    --bg-color-light: #F4F2EE;
+    --text-light: #FFFFFF;
+    --text-dark: #1F1F1F;
+    --transition-smooth: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+* {
+    box-sizing: border-box;
     margin: 0;
-    font-family: 'Montserrat', sans-serif;
-    color: #333;
+    padding: 0;
+}
+
+body,
+html {
+    font-family: 'Inter', sans-serif;
+    color: var(--text-dark);
+    background-color: var(--bg-color-dark);
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: var(--transition-smooth);
+}
+
+button {
+    cursor: pointer;
+    border: none;
+    background: none;
+    font-family: inherit;
+    transition: var(--transition-smooth);
+}
+
+main {
+    min-height: calc(100vh - 80px);
+    /* 80px approx footprint of header/booking bar */
+}
+
+/* Placeholer page shared styles */
+.placeholder-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.placeholder-page .content h1 {
+    font-size: 3rem;
+    font-weight: 300;
+    margin-bottom: 1rem;
+}
+
+.placeholder-page .content p {
+    font-size: 1.2rem;
+    font-weight: 300;
+    opacity: 0.8;
 }

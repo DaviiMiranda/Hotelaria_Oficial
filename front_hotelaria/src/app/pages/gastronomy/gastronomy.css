@@ -1,0 +1,57 @@
+.gastronomy-page {
+    padding-top: 80px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-color-light);
+    /* Lighter background as seen in mockup */
+}
+
+.gastronomy-hero {
+    position: relative;
+    width: 90%;
+    max-width: 1400px;
+    height: 70vh;
+    min-height: 600px;
+    background-color: #5d534a;
+    /* Placeholder brown for restaurant image */
+    background-blend-mode: multiply;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7));
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 100px;
+    /* Space for booking bar */
+    overflow: hidden;
+}
+
+.gastronomy-content {
+    padding: 4rem;
+    max-width: 900px;
+    color: var(--text-light);
+}
+
+.gastronomy-title {
+    font-size: 3.5rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.05em;
+}
+
+.separator {
+    width: 100%;
+    border: none;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 2rem;
+}
+
+.gastronomy-desc {
+    font-size: 1.25rem;
+    font-weight: 300;
+    line-height: 1.6;
+    max-width: 800px;
+    margin-left: auto;
+    /* Push to the right, to match design */
+    text-align: left;
+}
