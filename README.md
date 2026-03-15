@@ -9,8 +9,6 @@ Um projeto full-stack de um sistema de gerenciamento de hotelaria de luxo, desen
 
 *Recentemente atualizado com um novo visual elegante (Glassmorphism), Dashboard em tempo real e fluxo inteligente de registros.*
 
-<img width="800" alt="projetoHotelaria Dashboard" src="https://github.com/user-attachments/assets/3f614c52-5c41-4d47-8578-894e8a2ec61f" />
-<img width="800" alt="projetoHotelaria Registro" src="https://github.com/user-attachments/assets/f182a6a9-3d63-4ff3-b7f8-ec488207f2c1" />
 
 _(Substitua as imagens acima pelos novos prints do Hotel Overlook na próxima atualização do repositório)_
 
