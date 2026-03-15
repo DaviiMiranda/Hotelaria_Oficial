@@ -7,6 +7,7 @@ import { Events } from './pages/events/events';
 import { Experiences } from './pages/experiences/experiences';
 import { Contact } from './pages/contact/contact';
 import { Booking } from './pages/booking/booking';
+import { Dashboard } from './pages/dashboard/dashboard';
 
 export const routes: Routes = [
     { path: '', component: Home, pathMatch: 'full' },
@@ -17,5 +18,6 @@ export const routes: Routes = [
     { path: 'experiences', component: Experiences },
     { path: 'contact', component: Contact },
     { path: 'booking', component: Booking },
+    { path: 'dashboard', component: Dashboard },
     { path: '**', redirectTo: '' }
 ];

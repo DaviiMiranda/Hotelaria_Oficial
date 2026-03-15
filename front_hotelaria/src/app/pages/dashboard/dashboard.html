@@ -1,0 +1,157 @@
+<div class="dashboard-container">
+  <!-- Sidebar -->
+  <aside class="sidebar glass-effect">
+    <div class="sidebar-header">
+      <h2 class="brand-font">Adm</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <ul>
+        <li [class.active]="activeSection === 'guests'" (click)="setActiveSection('guests')">
+          <i class="bi bi-people"></i> <span>Listar Hóspedes</span>
+        </li>
+        <li [class.active]="activeSection === 'rooms'" (click)="setActiveSection('rooms')">
+          <i class="bi bi-door-open"></i> <span>Status Quartos</span>
+        </li>
+        <li [class.active]="activeSection === 'find'" (click)="setActiveSection('find')">
+          <i class="bi bi-search"></i> <span>Achar Hóspede</span>
+        </li>
+        <li [class.active]="activeSection === 'edit'" (click)="setActiveSection('edit')">
+          <i class="bi bi-pencil-square"></i> <span>Editar Hóspedes</span>
+        </li>
+        
+        <li class="nav-divider"></li>
+        
+        <li [routerLink]="['/']">
+          <i class="bi bi-box-arrow-left"></i> <span>Sair para o Site</span>
+        </li>
+      </ul>
+    </nav>
+  </aside>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+    <div class="content-wrapper glass-effect">
+      
+      <!-- 1. LISTAR HÓSPEDES -->
+      <section *ngIf="activeSection === 'guests'" class="data-section animate-fade-in">
+        <div class="section-header">
+          <h3>Gestão de Hóspedes</h3>
+          <p>Visão geral de todos os ocupantes atuais do Hotel Overlook.</p>
+        </div>
+        <div class="table-container">
+          <table class="luxury-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>CPF</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Check-in</th>
+                <th>Quarto</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let guest of guests">
+                <td>{{ guest.name }}</td>
+                <td>{{ guest.cpf }}</td>
+                <td>{{ guest.email }}</td>
+                <td>{{ guest.telephone }}</td>
+                <td>{{ guest.checkInDate }}</td>
+                <td>{{ guest.roomType }} #{{ guest.roomNumber }}</td>
+              </tr>
+              <tr *ngIf="guests.length === 0">
+                <td colspan="6" class="text-center">Carregando dados...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 2. STATUS QUARTOS -->
+      <section *ngIf="activeSection === 'rooms'" class="data-section animate-fade-in">
+        <div class="section-header">
+          <h3>Status de Ocupação</h3>
+          <p>Monitoramento em tempo real da disponibilidade.</p>
+        </div>
+        <div class="table-container">
+          <table class="luxury-table">
+            <thead>
+              <tr>
+                <th>Número</th>
+                <th>Tipo</th>
+                <th>Preço</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let room of rooms">
+                <td>{{ room.number }}</td>
+                <td>{{ room.type }}</td>
+                <td>{{ room.price | currency:'BRL' }}</td>
+                <td>
+                  <span class="badge" [ngClass]="room.available ? 'badge-available' : 'badge-occupied'">
+                    {{ room.available ? 'Disponível' : 'Ocupado' }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. ACHAR HÓSPEDE -->
+      <section *ngIf="activeSection === 'find'" class="data-section animate-fade-in">
+        <div class="section-header">
+          <h3>Localizar Hóspede</h3>
+          <p>Busca rápida por CPF (Ex: tente 123).</p>
+        </div>
+        
+        <div class="search-box glass-effect">
+          <input type="text" [(ngModel)]="searchCpf" placeholder="Digite o CPF..." class="form-control">
+          <button class="btn-primary" (click)="findGuest()">Buscar</button>
+        </div>
+
+        <div *ngIf="foundGuest" class="found-card glass-effect animate-fade-in">
+          <h4>Dados do Hóspede</h4>
+          <div class="guest-info-grid">
+            <div class="info-item"><strong>Nome:</strong> {{ foundGuest.name }}</div>
+            <div class="info-item"><strong>CPF:</strong> {{ foundGuest.cpf }}</div>
+            <div class="info-item"><strong>Email:</strong> {{ foundGuest.email }}</div>
+            <div class="info-item"><strong>Quarto:</strong> {{ foundGuest.roomType }} #{{ foundGuest.roomNumber }}</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. EDITAR HÓSPEDES -->
+      <section *ngIf="activeSection === 'edit'" class="data-section animate-fade-in">
+        <div class="section-header">
+          <h3>Edição Rápida</h3>
+          <p>Modifique os dados diretamente na tabela.</p>
+        </div>
+        <div class="table-container">
+          <table class="luxury-table">
+            <thead>
+              <tr>
+                <th>Nome</th>
+                <th>E-mail</th>
+                <th>Telefone</th>
+                <th>Ações</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let guest of guests">
+                <td><input type="text" [(ngModel)]="guest.name" class="table-input"></td>
+                <td><input type="text" [(ngModel)]="guest.email" class="table-input"></td>
+                <td><input type="text" [(ngModel)]="guest.telephone" class="table-input"></td>
+                <td>
+                  <button class="btn-small" (click)="updateGuest(guest)">Salvar</button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>

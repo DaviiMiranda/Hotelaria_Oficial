@@ -1,8 +1,15 @@
+@if (!isDashboard()) {
 <app-header></app-header>
+}
+
 <main>
     <router-outlet></router-outlet>
 </main>
+
 @if (isHomePage()) {
 <app-booking-bar></app-booking-bar>
 }
+
+@if (!isDashboard()) {
 <app-footer></app-footer>
+}

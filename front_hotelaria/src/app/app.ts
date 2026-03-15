@@ -15,13 +15,16 @@ export class App {
   protected readonly title = signal('Hotelaria_3');
   private router = inject(Router);
   protected isHomePage = signal(true);
+  protected isDashboard = signal(false);
 
   constructor() {
     this.router.events.pipe(
       filter(event => event instanceof NavigationEnd)
     ).subscribe((event: any) => {
+      const url = event.urlAfterRedirects;
       // The home page can be '/' or start with '/?' (query params in home)
-      this.isHomePage.set(event.urlAfterRedirects === '/' || event.urlAfterRedirects.startsWith('/?'));
+      this.isHomePage.set(url === '/' || url.startsWith('/?'));
+      this.isDashboard.set(url.includes('/dashboard'));
     });
   }
 }

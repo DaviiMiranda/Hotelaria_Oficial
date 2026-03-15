@@ -31,3 +31,9 @@ build/
 
 ### VS Code ###
 .vscode/
+
+# Gemini CLI - Ignorar apenas dados locais e sensíveis
+.gemini/.env
+.gemini/checkpoints/
+.gemini/sessions/
+.gemini/logs/

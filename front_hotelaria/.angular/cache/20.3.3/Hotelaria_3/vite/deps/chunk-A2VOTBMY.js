@@ -35,12 +35,14 @@ import {
   createNgModule,
   findLocaleData,
   formatRuntimeError,
+  getLocaleCurrencyCode,
   getLocalePluralCase,
   inject,
   isPromise,
   isSubscribable,
   numberAttribute,
   performanceMarkFeature,
+  registerLocaleData,
   setClassMetadata,
   stringify,
   untracked,
@@ -55,10 +57,10 @@ import {
   ɵɵinject,
   ɵɵinjectAttribute,
   ɵɵstyleProp
-} from "./chunk-WKHL26JG.js";
+} from "./chunk-6J54M6DO.js";
 import {
   Subject
-} from "./chunk-YBNECNG7.js";
+} from "./chunk-RSS3ODKE.js";
 import {
   __async,
   __spreadProps,
@@ -914,6 +916,14 @@ function getLocaleEraNames(locale, width) {
   const erasData = data[LocaleDataIndex.Eras];
   return getLastDefinedValue(erasData, width);
 }
+function getLocaleFirstDayOfWeek(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.FirstDayOfWeek];
+}
+function getLocaleWeekEndRange(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.WeekendRange];
+}
 function getLocaleDateFormat(locale, width) {
   const data = findLocaleData(locale);
   return getLastDefinedValue(data[LocaleDataIndex.DateFormat], width);
@@ -942,6 +952,17 @@ function getLocaleNumberSymbol(locale, symbol) {
 function getLocaleNumberFormat(locale, type) {
   const data = findLocaleData(locale);
   return data[LocaleDataIndex.NumberFormats][type];
+}
+function getLocaleCurrencySymbol(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.CurrencySymbol] || null;
+}
+function getLocaleCurrencyName(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.CurrencyName] || null;
+}
+function getLocaleCurrencyCode2(locale) {
+  return getLocaleCurrencyCode(locale);
 }
 function getLocaleCurrencies(locale) {
   const data = findLocaleData(locale);
@@ -979,6 +1000,10 @@ function getLocaleExtraDayPeriods(locale, formStyle, width) {
   ]];
   const dayPeriods = getLastDefinedValue(dayPeriodsData, formStyle) || [];
   return getLastDefinedValue(dayPeriods, width) || [];
+}
+function getLocaleDirection(locale) {
+  const data = findLocaleData(locale);
+  return data[LocaleDataIndex.Directionality];
 }
 function getLastDefinedValue(data, index) {
   for (let i = index; i > -1; i--) {
@@ -1991,20 +2016,20 @@ var NgClass = class _NgClass {
   The NgClass directive uses the custom change detection algorithm for its inputs. The custom
   algorithm is necessary since inputs are represented as complex object or arrays that need to be
   deeply-compared.
-      This algorithm is perf-sensitive since NgClass is used very frequently and its poor performance
+     This algorithm is perf-sensitive since NgClass is used very frequently and its poor performance
   might negatively impact runtime performance of the entire change detection cycle. The design of
   this algorithm is making sure that:
   - there is no unnecessary DOM manipulation (CSS classes are added / removed from the DOM only when
   needed), even if references to bound objects change;
   - there is no memory allocation if nothing changes (even relatively modest memory allocation
   during the change detection cycle can result in GC pauses for some of the CD cycles).
-      The algorithm works by iterating over the set of bound classes, staring with [class] binding and
+     The algorithm works by iterating over the set of bound classes, staring with [class] binding and
   then going over [ngClass] binding. For each CSS class name:
   - check if it was seen before (this information is tracked in the state map) and if its value
   changed;
   - mark it as "touched" - names that are not marked are not present in the latest set of binding
   and we can remove such class name from the internal data structures;
-      After iteration over all the CSS class names we've got data structure with all the information
+     After iteration over all the CSS class names we've got data structure with all the information
   necessary to synchronize changes to the DOM - it is enough to iterate over the state map, flush
   changes to the DOM and reset internal data structures so those are ready for the next change
   detection cycle.
@@ -3680,7 +3705,17 @@ var PlatformNavigation = class _PlatformNavigation {
 })();
 
 // node_modules/@angular/common/fesm2022/common.mjs
+function registerLocaleData2(data, localeId, extraData) {
+  return registerLocaleData(data, localeId, extraData);
+}
 var PLATFORM_BROWSER_ID = "browser";
+var PLATFORM_SERVER_ID = "server";
+function isPlatformBrowser(platformId) {
+  return platformId === PLATFORM_BROWSER_ID;
+}
+function isPlatformServer(platformId) {
+  return platformId === PLATFORM_SERVER_ID;
+}
 var VERSION = new Version("20.3.2");
 var ViewportScroller = class _ViewportScroller {
   // De-sugared tree-shakable injection
@@ -3799,6 +3834,34 @@ function findAnchorFromDocument(document, target) {
   }
   return null;
 }
+var NullViewportScroller = class {
+  /**
+   * Empty implementation
+   */
+  setOffset(offset) {
+  }
+  /**
+   * Empty implementation
+   */
+  getScrollPosition() {
+    return [0, 0];
+  }
+  /**
+   * Empty implementation
+   */
+  scrollToPosition(position) {
+  }
+  /**
+   * Empty implementation
+   */
+  scrollToAnchor(anchor) {
+  }
+  /**
+   * Empty implementation
+   */
+  setHistoryScrollRestoration(scrollRestoration) {
+  }
+};
 var PLACEHOLDER_QUALITY = "20";
 function getUrl(src, win) {
   return isAbsoluteUrl(src) ? new URL(src) : new URL(src, win.location.href);
@@ -3942,6 +4005,49 @@ var netlifyLoaderInfo = {
 var NETLIFY_LOADER_REGEX = /https?\:\/\/[^\/]+\.netlify\.app\/.+/;
 function isNetlifyUrl(url) {
   return NETLIFY_LOADER_REGEX.test(url);
+}
+function provideNetlifyLoader(path) {
+  if (path && !isValidPath(path)) {
+    throw new RuntimeError(2959, ngDevMode && `Image loader has detected an invalid path (\`${path}\`). To fix this, supply either the full URL to the Netlify site, or leave it empty to use the current site.`);
+  }
+  if (path) {
+    const url = new URL(path);
+    path = url.origin;
+  }
+  const loaderFn = (config) => {
+    return createNetlifyUrl(config, path);
+  };
+  const providers = [{
+    provide: IMAGE_LOADER,
+    useValue: loaderFn
+  }];
+  return providers;
+}
+var validParams = /* @__PURE__ */ new Map([["height", "h"], ["fit", "fit"], ["quality", "q"], ["q", "q"], ["position", "position"]]);
+function createNetlifyUrl(config, path) {
+  const url = new URL(path ?? "https://a/");
+  url.pathname = "/.netlify/images";
+  if (!isAbsoluteUrl(config.src) && !config.src.startsWith("/")) {
+    config.src = "/" + config.src;
+  }
+  url.searchParams.set("url", config.src);
+  if (config.width) {
+    url.searchParams.set("w", config.width.toString());
+  }
+  const configQuality = config.loaderParams?.["quality"] ?? config.loaderParams?.["q"];
+  if (config.isPlaceholder && !configQuality) {
+    url.searchParams.set("q", PLACEHOLDER_QUALITY);
+  }
+  for (const [param, value] of Object.entries(config.loaderParams ?? {})) {
+    if (validParams.has(param)) {
+      url.searchParams.set(validParams.get(param), value.toString());
+    } else {
+      if (ngDevMode) {
+        console.warn(formatRuntimeError(2959, `The Netlify image loader has detected an \`<img>\` tag with the unsupported attribute "\`${param}\`".`));
+      }
+    }
+  }
+  return url.hostname === "a" ? url.href.replace(url.origin, "") : url.href;
 }
 function imgDirectiveDetails(ngSrc, includeNgSrc = true) {
   const ngSrcInfo = includeNgSrc ? `(activated on an <img> element with the \`ngSrc="${ngSrc}"\`) ` : "";
@@ -4983,14 +5089,95 @@ export {
   getDOM,
   setRootDomAdapter,
   DomAdapter,
+  PlatformLocation,
   LOCATION_INITIALIZED,
+  BrowserPlatformLocation,
+  normalizeQueryParams,
   LocationStrategy,
+  APP_BASE_HREF,
   PathLocationStrategy,
   Location,
   HashLocationStrategy,
+  NumberFormatStyle,
+  Plural,
+  FormStyle,
+  TranslationWidth,
+  FormatWidth,
+  NumberSymbol,
+  WeekDay,
+  getLocaleId,
+  getLocaleDayPeriods,
+  getLocaleDayNames,
+  getLocaleMonthNames,
+  getLocaleEraNames,
+  getLocaleFirstDayOfWeek,
+  getLocaleWeekEndRange,
+  getLocaleDateFormat,
+  getLocaleTimeFormat,
+  getLocaleDateTimeFormat,
+  getLocaleNumberSymbol,
+  getLocaleNumberFormat,
+  getLocaleCurrencySymbol,
+  getLocaleCurrencyName,
+  getLocaleCurrencyCode2 as getLocaleCurrencyCode,
+  getLocalePluralCase2 as getLocalePluralCase,
+  getLocaleExtraDayPeriodRules,
+  getLocaleExtraDayPeriods,
+  getLocaleDirection,
+  getCurrencySymbol,
+  getNumberOfCurrencyDigits,
+  formatDate,
+  formatCurrency,
+  formatPercent,
+  formatNumber,
+  NgLocalization,
+  NgLocaleLocalization,
+  NgClass,
+  NgComponentOutlet,
+  NgForOfContext,
+  NgForOf,
+  NgIf,
+  NgIfContext,
+  NgSwitch,
+  NgSwitchCase,
+  NgSwitchDefault,
+  NgPlural,
+  NgPluralCase,
+  NgStyle,
+  NgTemplateOutlet,
+  AsyncPipe,
+  LowerCasePipe,
+  TitleCasePipe,
+  UpperCasePipe,
+  DATE_PIPE_DEFAULT_TIMEZONE,
+  DATE_PIPE_DEFAULT_OPTIONS,
+  DatePipe,
+  I18nPluralPipe,
+  I18nSelectPipe,
+  JsonPipe,
+  KeyValuePipe,
+  DecimalPipe,
+  PercentPipe,
+  CurrencyPipe,
+  SlicePipe,
   CommonModule,
+  PlatformNavigation,
+  registerLocaleData2 as registerLocaleData,
   PLATFORM_BROWSER_ID,
-  ViewportScroller
+  PLATFORM_SERVER_ID,
+  isPlatformBrowser,
+  isPlatformServer,
+  VERSION,
+  ViewportScroller,
+  NullViewportScroller,
+  IMAGE_LOADER,
+  provideCloudflareLoader,
+  provideCloudinaryLoader,
+  provideImageKitLoader,
+  provideImgixLoader,
+  provideNetlifyLoader,
+  PRECONNECT_CHECK_BLOCKLIST,
+  NgOptimizedImage
 };
 /*! Bundled license information:
 
@@ -5004,4 +5191,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-AGFT3M6I.js.map
+//# sourceMappingURL=chunk-A2VOTBMY.js.map

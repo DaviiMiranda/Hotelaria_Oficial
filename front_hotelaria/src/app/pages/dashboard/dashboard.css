@@ -1,0 +1,217 @@
+.dashboard-container {
+    display: flex;
+    min-height: 100vh;
+    background: linear-gradient(rgba(30, 0, 0, 0.85), rgba(30, 0, 0, 0.85)),
+                url('/assets/luxury_hotel_background.png') center/cover no-repeat;
+    font-family: 'Montserrat', sans-serif;
+    color: #fff;
+    padding: 0;
+}
+
+.brand-font {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.glass-effect {
+    background: rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Sidebar Styling */
+.sidebar {
+    width: 300px;
+    padding: 40px 25px;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    border-right: 1px solid rgba(255,255,255,0.05);
+}
+
+.sidebar-header {
+    margin-bottom: 50px;
+    text-align: left;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 25px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.02);
+    font-size: 0.95rem;
+    font-weight: 400;
+}
+
+.sidebar-nav li:hover {
+    background: rgba(255, 255, 255, 0.07);
+    transform: translateX(8px);
+}
+
+.sidebar-nav li.active {
+    background: #9e1b1b;
+    box-shadow: 0 10px 20px rgba(158, 27, 27, 0.4);
+    font-weight: 500;
+}
+
+.nav-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+    margin: 30px 0 !important;
+    cursor: default !important;
+}
+
+/* Main Content Styling */
+.main-content {
+    flex: 1;
+    height: 100vh;
+    overflow: hidden;
+    padding: 30px;
+}
+
+.content-wrapper {
+    height: 100%;
+    padding: 50px;
+    overflow-y: auto;
+    border-radius: 20px;
+}
+
+.section-header {
+    margin-bottom: 40px;
+}
+
+.section-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    letter-spacing: -1px;
+}
+
+.section-header p {
+    opacity: 0.6;
+    font-weight: 300;
+    font-size: 1.1rem;
+}
+
+/* Search Box */
+.search-box {
+    display: flex;
+    gap: 15px;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+}
+
+.search-box input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 12px 20px;
+}
+
+/* Found Card */
+.found-card {
+    padding: 30px;
+    border-radius: 15px;
+    background: rgba(158, 27, 27, 0.1);
+}
+
+.found-card h4 {
+    margin-bottom: 25px;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 15px;
+}
+
+.guest-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* Tables */
+.table-container {
+    border-radius: 15px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.01);
+}
+
+.luxury-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.luxury-table th {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    color: #9e1b1b;
+    font-weight: 700;
+}
+
+.luxury-table td {
+    padding: 18px 20px;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    font-size: 0.95rem;
+}
+
+.table-input {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #fff;
+    padding: 8px 12px;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.btn-small {
+    background: #9e1b1b;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 5px;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.btn-small:hover {
+    background: #7a1515;
+    box-shadow: 0 4px 12px rgba(158, 27, 27, 0.3);
+}
+
+/* Animations */
+.animate-fade-in {
+    animation: fadeIn 0.6s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.content-wrapper::-webkit-scrollbar {
+    width: 8px;
+}
+
+.content-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(158, 27, 27, 0.4);
+    border-radius: 10px;
+}

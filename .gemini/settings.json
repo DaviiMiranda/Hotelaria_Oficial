@@ -1,0 +1,9 @@
+{
+  "checkpointing": {
+    "enabled": true,
+    "saveInterval": 300
+  },
+  "memory": {
+    "persistent": true
+  }
+}
